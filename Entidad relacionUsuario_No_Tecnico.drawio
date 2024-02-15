@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2024-02-15T04:59:17.830Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 OPR/107.0.0.0" etag="tdtFKDvDoXgv_LddPxWf" version="23.1.4" type="github" pages="5">
+<mxfile host="app.diagrams.net" modified="2024-02-15T05:01:34.541Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36 OPR/107.0.0.0" etag="boQWA6vu6gdPFt_0SrYx" version="23.1.4" type="github" pages="5">
   <diagram name="M.E.R to Data-Scientist" id="4eTu7QupzgI3NJe2kLR5">
-    <mxGraphModel dx="2634" dy="1618" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="4921" dy="2666" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="WwmQle-dq8sb8E5O5fLl-0" />
         <mxCell id="WwmQle-dq8sb8E5O5fLl-1" parent="WwmQle-dq8sb8E5O5fLl-0" />
@@ -310,7 +310,7 @@
           <mxGeometry x="-780" y="115" width="70" height="25" as="geometry" />
         </mxCell>
         <mxCell id="WwmQle-dq8sb8E5O5fLl-71" value="Nombre" style="ellipse;whiteSpace=wrap;html=1;align=center;" parent="WwmQle-dq8sb8E5O5fLl-1" vertex="1">
-          <mxGeometry x="-850" y="147.5" width="106" height="50" as="geometry" />
+          <mxGeometry x="-963" y="175" width="106" height="50" as="geometry" />
         </mxCell>
         <mxCell id="WwmQle-dq8sb8E5O5fLl-72" value="Telefono" style="ellipse;whiteSpace=wrap;html=1;align=center;" parent="WwmQle-dq8sb8E5O5fLl-1" vertex="1">
           <mxGeometry x="-780" y="205" width="106" height="50" as="geometry" />
@@ -1455,7 +1455,7 @@
     </mxGraphModel>
   </diagram>
   <diagram name="MER_proyect_no_Technical_Users" id="RIj9T3fIU52DeXrUf8tF">
-    <mxGraphModel dx="2634" dy="1618" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="5574" dy="2965" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="V5ozOfvYd1Mtgx5hKiac-0" />
         <mxCell id="V5ozOfvYd1Mtgx5hKiac-1" parent="V5ozOfvYd1Mtgx5hKiac-0" />
