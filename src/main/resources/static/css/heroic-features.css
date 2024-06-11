@@ -1,0 +1,31 @@
+body {
+  padding-top: 56px;
+}
+
+
+.btn-outline-success {
+  background-color: black;
+}
+.btn-success{
+  background-image: linear-gradient(
+        150deg,
+        #9500ff,
+        #09f,
+        #00DDFF
+  );
+    border-radius: 8px;
+    color: #ffff;
+    display: inline-block;
+    font-size: 18px;
+    padding: 15px;
+    cursor: pointer;
+    transition: .3s;
+    text-decoration: none;
+    margin: center;
+}
+
+.jumbotron {
+  background-image: url(https://www.freepik.es/foto-gratis/fondo-pantalla-humo-abstracto-escritorio_17581093.htm#query=imagenes%20de%20fondo&position=8&from_view=search&track=ais);
+}
+
+

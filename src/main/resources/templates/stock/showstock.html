@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Fotograbados LTDA</title>
+  <!-- Bootstrap core CSS -->
+  <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
+</head>
+<body>
+<!-- Navigation -->
+<div th:insert="~{administrador/template_admin.html::header}"></div>
+<!-- Page Content -->
+<div class="container">
+  <!-- Page Heading/Breadcrumbs -->
+  <h1 class="mt-4 mb-3">
+    Fotograbados LTDA <small>Stock</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+    <li class="breadcrumb-item active">Ver preguntas</li>
+  </ol>
+  <!-- Botón para crear una nueva categoría -->
+  <a class="btn btn-primary" th:href="@{/stock/createQ}">Crear Capacidad</a>
+  <h2>Capacidad habilitada</h2>
+  <table class="table">
+    <thead>
+    <tr>
+      <th scope="col">Numero pregunta</th>
+      <th scope="col">Pregunta</th>
+      <th scope="col">Estado categoria</th>
+      <th scope="col">Acción</th>
+      <th scope="col">Acción</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Iterar sobre las categorías y mostrar la información -->
+    <tr th:each="encuesta : ${encuesta}">
+      <td th:text="${encuesta.idPregunta}"></td>
+      <td th:text="${encuesta.pregunta}"></td>
+      <td><a class="btn btn-warning" th:href="@{/encuestaSatisfaccion/edit/{idPregunta}(idPregunta=${encuesta.idPregunta})}">Editar</a></td>
+      <td><a class="btn btn-danger" th:href="@{/encuestaSatisfaccion/delete/{idPregunta}(idPregunta=${encuesta.idPregunta})}">Eliminar</a></td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+<!-- Bootstrap core JavaScript -->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Fotograbados LTDA</title>
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
+    <link th:href="@{css/answercli.css}" rel="stylesheet">
+</head>
+<body>
+
+
+<!-- Navigation -->
+<div th:insert="~{administrador/template_admin.html::header}"></div>
+
+<!-- Page Content -->
+<div class="container">
+    <div class="encuesta">
+        <h2>Encuesta de satisfacción</h2>
+        <p>Por favor, califica tu experiencia con el sistema:</p>
+        <form th:action="@{/encuesta/saveQ}" method="post">
+            <div th:each="question : ${questions}">
+                <label th:for="${'question' + question.id}" th:text="${question.texto}"></label>
+                <select th:id="${'question' + question.id}" th:name="${'question' + question.id}">
+                    <option value="1">Muy mala</option>
+                    <option value="2">Mala</option>
+                    <option value="3">Regular</option>
+                    <option value="4">Buena</option>
+                    <option value="5">Muy buena</option>
+                </select>
+            </div>
+            <label for="comentarios">Comentarios adicionales:</label>
+            <textarea id="comentarios" name="comentarios"></textarea>
+
+            <!-- Botón de envío -->
+            <input type="submit" value="Enviar">
+        </form>
+    </div>
+</div>
+
+<!-- Bootstrap core JavaScript -->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
