@@ -45,21 +45,22 @@ public class StockController {
         return "redirect:/stock";
     }
     @GetMapping("/edit/{idStockMat}")
-    public String editStock(@PathVariable Long idStockMat, Model model){
+    public String editStock(@PathVariable Long idStockMat, Model model) {
+        StockMatPri stock = new StockMatPri();
         Optional<StockMatPri> optionalStockMatPri = stockService.get(idStockMat);
-        if ( optionalStockMatPri.isPresent()) {
-            model.addAttribute("stock", optionalStockMatPri.get());
-            return "encuesta/edistock";
-        } else {
-            throw new NotFoundException("Stock no encontrado");
-        }
+        stock = optionalStockMatPri.get();
+
+        LOGGER.info("stock buscado: {}", stock);
+        model.addAttribute("stock", stock);
+        return "stock/edistock";
     }
 
     @PostMapping("/updateStock")
-    public String updateStock(StockMatPri matPri) {
-        StockMatPri s = stockService.get(matPri.getIdStockMat()).orElseThrow(() -> new NotFoundException("Stock no encontrado"));
+    public String updateStock(StockMatPri stock) {
+        StockMatPri st = new StockMatPri();
+        st = stockService.get(stock.getIdStockMat()).get();
 
-        stockService.update(matPri);
+        stockService.update(stock);
         return "redirect:/stock";
     }
     @GetMapping("/deleteStock/{idStockMat}")
@@ -67,6 +68,7 @@ public class StockController {
         StockMatPri s = new StockMatPri();
         s = stockService.get(idStockMat).get();
 
+        stockService.delete(idStockMat);
         return "redirect:/stock";
     }
 }

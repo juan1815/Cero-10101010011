@@ -22,28 +22,29 @@
   </h1>
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
-    <li class="breadcrumb-item active">Ver preguntas</li>
+    <li class="breadcrumb-item active">Ver Stock</li>
   </ol>
   <!-- Botón para crear una nueva categoría -->
-  <a class="btn btn-primary" th:href="@{/stock/createQ}">Crear Capacidad</a>
+  <a class="btn btn-primary" th:href="@{/stock/createStock}">Crear Capacidad</a>
   <h2>Capacidad habilitada</h2>
   <table class="table">
     <thead>
     <tr>
-      <th scope="col">Numero pregunta</th>
-      <th scope="col">Pregunta</th>
-      <th scope="col">Estado categoria</th>
+      <th scope="col">Numero de grupo</th>
+      <th scope="col">Capacidad</th>
+      <th scope="col">Fecha entrada</th>
       <th scope="col">Acción</th>
       <th scope="col">Acción</th>
     </tr>
     </thead>
     <tbody>
     <!-- Iterar sobre las categorías y mostrar la información -->
-    <tr th:each="encuesta : ${encuesta}">
-      <td th:text="${encuesta.idPregunta}"></td>
-      <td th:text="${encuesta.pregunta}"></td>
-      <td><a class="btn btn-warning" th:href="@{/encuestaSatisfaccion/edit/{idPregunta}(idPregunta=${encuesta.idPregunta})}">Editar</a></td>
-      <td><a class="btn btn-danger" th:href="@{/encuestaSatisfaccion/delete/{idPregunta}(idPregunta=${encuesta.idPregunta})}">Eliminar</a></td>
+    <tr th:each="stock : ${stock}">
+      <td th:text="${stock.idStockMat}"></td>
+      <td th:text="${stock.cantidad}"></td>
+      <td th:text="${stock.fechaEntrada}"></td>
+      <td><a class="btn btn-warning" th:href="@{/stock/edit/{idStockMat}(idStockMat=${stock.idStockMat})}">Editar</a></td>
+      <td><a class="btn btn-danger" th:href="@{/stock/deleteStock/{idStockMat}(idStockMat=${stock.idStockMat})}">Eliminar</a></td>
     </tr>
     </tbody>
   </table>

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "pregunta_encuesta")
@@ -22,8 +23,8 @@ public class QuestionSatisfactionSur {
     private Long idPregunta;
     @Column(nullable = false)
     private String pregunta;
-    @Column(name = "fecha_pregunta",nullable = false)
-    private LocalDate fechaPregunta;
+    @Column(name = "fecha_pregunta")
+    private Date fechaPregunta;
 
             //RELATIONS
     @OneToOne(mappedBy = "questionSSurs")

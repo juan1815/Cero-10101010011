@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Fotogra Reseña </title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
+
+</head>
+
+<body>
+
+<!-- Navigation -->
+<div th:include="administrador/template_admin.html::header"></div>
+
+<!-- Page Content -->
+<div class="container">
+
+
+    <!-- Page Heading/Breadcrumbs -->
+    <h1 class="mt-4 mb-3">
+        Fotograbados LTDA <small>Reseñas</small>
+    </h1>
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
+        <li class="breadcrumb-item active">Ver Reseñas</li>
+    </ol>
+    <h2>Reseñas</h2>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Correo</th>
+            <th scope="col">Calificación (de 5)</th>
+            <th scope="col">Comentarios</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="opinion : ${opinionProducts}">
+            <td th:text="${opinion.user.customerName}"></td>
+            <td th:text="${opinion.user.email}"></td>
+            <td th:text="${opinion.rating + '/5'}"></td>
+            <td th:text="${opinion.comments}"></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<!-- /.container -->
+
+<!-- Bootstrap core JavaScript -->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+</body>
+
+</html>

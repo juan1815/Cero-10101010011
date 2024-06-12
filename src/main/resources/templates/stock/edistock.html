@@ -18,30 +18,21 @@
 <div class="container">
   <!-- Page Heading/Breadcrumbs -->
   <h1 class="mt-4 mb-3">
-    Fotograbados LTDA <small>Encuesta</small>
+    Fotogra Stock <small>Stock</small>
   </h1>
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
-    <li class="breadcrumb-item active">Actualizar Encuesta</li>
+    <li class="breadcrumb-item active">Actualizar Stock</li>
   </ol>
-  <h2>Actualizar Encuesta</h2>
+  <h2>Actualizar Stock</h2>
   <!-- Formulario para actualizar categoría -->
-  <form class="form-horizontal" th:action="@{/encuestaSatisfaccion/updateQuestion}" method="post" enctype="multipart/form-data">
-    <input type="hidden" name="idCategoria" th:value="${category.idCategoria}">
+  <form class="form-horizontal" th:action="@{/stock/updateStock}" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="idStockMat" th:value="${stock.idStockMat}">
 
     <div class="form-group">
-      <label class="control-label col-sm-2" for="pregunta">Pregunta:</label>
+      <label class="control-label col-sm-2" for="cantidad">Cantidad:</label>
       <div class="col-sm-10">
-        <textarea class="form-control" id="pregunta" name="pregunta" placeholder="Ingrese la pregunta que va llenar los usuarios" required autocomplete="off" th:text="${encuesta.pregunta}"></textarea>
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-2" for="estadoCategoria">Estado Categoria:</label>
-      <div class="col-sm-10">
-        <select class="form-control" id="estadoCategoria" name="estadoCategoria">
-          <option th:value="En_uso" th:text="'En uso'" th:selected="${category.estadoCategoria == 'En_uso'}"></option>
-          <option th:value="En_reparacion" th:text="'En Reparacion'" th:selected="${category.estadoCategoria == 'En_reparacion'}"></option>
-        </select>
+        <input type="number" class="form-control" id="cantidad" name="cantidad" placeholder="Ingrese la cantidad del producto" th:value="${stock.cantidad}" required autocomplete="off">
       </div>
     </div>
     <div class="row">

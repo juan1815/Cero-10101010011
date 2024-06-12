@@ -14,11 +14,11 @@ import java.util.List;
 @Table(name = "stock_materiPri")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class StockMatPri {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_stockMat")
     private Long idStockMat;
     private Integer cantidad;

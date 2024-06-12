@@ -23,9 +23,14 @@ body {
     text-decoration: none;
     margin: center;
 }
-
-.jumbotron {
-  background-image: url(https://www.freepik.es/foto-gratis/fondo-pantalla-humo-abstracto-escritorio_17581093.htm#query=imagenes%20de%20fondo&position=8&from_view=search&track=ais);
+/*
+.card {
+  margin: auto;
+  width: 80%;
 }
+.table-container {
+  display: flex;
+  justify-content: center;
+} **/
 
 

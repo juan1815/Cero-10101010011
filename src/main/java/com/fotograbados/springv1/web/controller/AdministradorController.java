@@ -1,6 +1,7 @@
 package com.fotograbados.springv1.web.controller;
 
 import com.fotograbados.springv1.domain.service.IUsuarioService;
+import com.fotograbados.springv1.domain.service.agc.IOpinionService;
 import com.fotograbados.springv1.domain.service.gproducto.IProductService;
 import com.fotograbados.springv1.domain.service.ventas.IOrderService;
 import com.fotograbados.springv1.persistence.entities.inventario.Products;
@@ -25,13 +26,15 @@ public class AdministradorController {
     private IUsuarioService usuarioService;
     @Autowired
     private IOrderService orderService;
+    @Autowired
+    private IOpinionService opinionService;
     private final Logger logg = LoggerFactory.getLogger(AdministradorController.class);
 
     @GetMapping("")
     public String home(Model model) {
         List<Products> products = productService.findAll();
         model.addAttribute("productos", products);
-        return "administrador/home";
+        return "administrador/dashboard";
     }
 
     @GetMapping("/usuarios")
@@ -45,6 +48,13 @@ public class AdministradorController {
         model.addAttribute("ordenes", orderService.findAll());
         return "administrador/ordenes";
     }
+
+    @GetMapping("/reseñas")
+    public String reseñas(Model model){
+        model.addAttribute("opinionProducts", opinionService.findAll());
+        return "administrador/reseñas";
+    }
+
     @GetMapping("/detalle/{id}")
     public String detalle(Model model, @PathVariable Long idOrder) {
         logg.info("Id de la orden {}",idOrder);
