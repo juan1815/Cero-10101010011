@@ -30,6 +30,8 @@ public class Users {
     private String email;
     private String direccion;
     private String telefono;
+    private String genero;
+    private String codigoPostal;
     //private String tipo;
     private String password;
                 //RELATIONS

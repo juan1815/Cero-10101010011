@@ -1,6 +1,6 @@
 package com.fotograbados.springv1.persistence.repository.ventas;
 
-import com.fotograbados.springv1.domain.dto.VentaDTO;
+import com.fotograbados.springv1.domain.dto.*;
 import com.fotograbados.springv1.persistence.entities.Users;
 import com.fotograbados.springv1.persistence.entities.ventas.OrderEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,35 +12,38 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
     List<OrderEntity> findByUsers(Users users);
+        //Ventas por producto
+    @Query(nativeQuery = true,
+            value = "SELECT YEAR(o.fecha_venta) AS year, MONTH(o.fecha_venta) AS month, p.id_producto AS product_id, SUM(op.cantidad) AS quantity_sold " +
+                    "FROM order_entity o " +
+                    "JOIN order_product op ON o.id_purchase = op.order_id " +
+                    "JOIN products p ON op.product_id = p.id_producto " +
+                    "GROUP BY YEAR(o.fecha_venta), MONTH(o.fecha_venta), p.id_producto " +
+                    "ORDER BY year, month, product_id;")
+    List<ProductSalesPerMonthDTO> findProductSalesPerMonth();
 
-    @Query(nativeQuery = true, value = "SELECT " +
-            "o.fecha_venta AS fechaVenta, " +
-            "u.nombre AS nombreUsuario, " +
-            "o.numero AS numeroOrden, " +
-            "s.descripcion AS descripcionEnvio, " +
-            "o.total AS totalVenta, " +
-            "p.nombre AS metodoPago " +
-            "FROM " +
-            "order_entity o " +
-            "JOIN users u ON o.id_usuario = u.id " +
-            "JOIN shipping_detail s ON o.id_detalleenv = s.id_detalleenv " +
-            "JOIN payment_method_entity p ON o.id_metodo_pago = p.id_metodo_pago " +
-            "WHERE o.estado = 'Completado' " +
-            "ORDER BY o.fecha_venta DESC")
-    List<VentaDTO> generarReporteVentas();
+    //Sales Month
+    @Query(nativeQuery = true,
+            value = "SELECT YEAR(o.fecha_venta) AS year, MONTH(o.fecha_venta) AS month, SUM(o.total) AS total_ventas " +
+                    "FROM order_entity o " +
+                    "GROUP BY YEAR(o.fecha_venta), MONTH(o.fecha_venta) " +
+                    "ORDER BY year, month;")
+    List<TotalSalesPerMonthDTO> findTotalSalesPerMonth();
 
-    @Query("SELECT YEAR(o.fechaVenta) AS year, MONTH(o.fechaVenta) AS month, SUM(o.total) AS totalVentas " +
-            "FROM OrderEntity o " +
-            "WHERE o.estado = 'Completado' " +
-            "GROUP BY YEAR(o.fechaVenta), MONTH(o.fechaVenta) " +
-            "ORDER BY YEAR(o.fechaVenta) DESC, MONTH(o.fechaVenta) DESC")
-    List<Object[]> generarReporteVentasMensuales();
+    @Query(nativeQuery = true,
+            value = "SELECT YEAR(o.fecha_venta) AS year, MONTH(o.fecha_venta) AS month, DAY(o.fecha_venta) AS day, SUM(o.total) AS total_ventas " +
+                    "FROM order_entity o " +
+                    "GROUP BY YEAR(o.fecha_venta), MONTH(o.fecha_venta), DAY(o.fecha_venta) " +
+                    "ORDER BY year, month, day;")
+    List<TotalSalesPerDayDTO> findTotalSalesPerDay();
 
-    @Query("SELECT DATE(o.fechaVenta) AS fechaVenta, SUM(o.total) AS totalVentas " +
-            "FROM OrderEntity o " +
-            "WHERE o.estado = 'Completado' " +
-            "GROUP BY DATE(o.fechaVenta) " +
-            "ORDER BY DATE(o.fechaVenta) DESC")
-    List<Object[]> generarReporteVentasDiarias();
+            //Sales for Region
+    @Query(nativeQuery = true,
+            value = "SELECT r.region_name AS region_name, u.tipo AS customer_type, u.codigo_postal AS postal_code, COUNT(*) AS customer_count " +
+                    "FROM users u " +
+                    "JOIN regions r ON u.direccion LIKE CONCAT('%', r.region_name, '%') " +
+                    "GROUP BY r.region_name, u.tipo, u.codigo_postal ")
+    List<CustomerTypePerRegionWithPostalCodeDTO> findCustomerTypesPerRegionWithPostalCode();
+
 
 }
