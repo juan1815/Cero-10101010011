@@ -3,9 +3,11 @@ package com.fotograbados.springv1.web.controller;
 
 import com.fotograbados.springv1.domain.service.IUsuarioService;
 import com.fotograbados.springv1.domain.service.UploadFileService;
+import com.fotograbados.springv1.domain.service.gproducto.ICategoryService;
 import com.fotograbados.springv1.domain.service.gproducto.IProductService;
 import com.fotograbados.springv1.domain.service.gproducto.IStockService;
 import com.fotograbados.springv1.persistence.entities.Users;
+import com.fotograbados.springv1.persistence.entities.inventario.Category;
 import com.fotograbados.springv1.persistence.entities.inventario.Products;
 import com.fotograbados.springv1.persistence.entities.inventario.StockMatPri;
 import com.fotograbados.springv1.web.server.NotFoundException;
@@ -14,10 +16,12 @@ import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -32,6 +36,8 @@ public class ProductoController {
     private IUsuarioService usuarioService;
     @Autowired
     private IStockService stockService;
+    @Autowired
+    private ICategoryService categoryService;
 
     @Autowired
     private UploadFileService uploadFileService;
@@ -44,12 +50,21 @@ public class ProductoController {
     }
 
     @GetMapping("/create")
-    public String create(){
+    public String create(Model model){
+        List<StockMatPri> stocks = stockService.findAll();
+        List<Category> categories = categoryService.findAll();
+        model.addAttribute("stocks", stocks);
+        model.addAttribute("categories", categories);
+
         return "productos/create";
     }
 
     @PostMapping("/save")
-    public String save(Products products, @RequestParam("img") MultipartFile file, HttpSession session) throws IOException {
+    public String save(@ModelAttribute Products products,
+                       @RequestParam("img") MultipartFile file,
+                       @RequestParam("category.idCategoria") Long idCategoria,
+                       @RequestParam("stock.idStockMat") Long idStockMat,
+                       HttpSession session) throws IOException {
         LOGGER.info("Este es el objeto Producto {}", products);
         
 //        Object idUsuarioObj = session.getAttribute("idUsuario");
@@ -74,7 +89,25 @@ public class ProductoController {
            String nombreImagen = uploadFileService.saveImage(file);
             products.setImagen(nombreImagen);
         }
-//
+
+        // Validar y establecer la categoría y el stock del producto
+        Category category = categoryService.get(idCategoria).orElse(null);
+        StockMatPri stock = stockService.get(idStockMat).orElse(null);
+
+        if (category == null) {
+            LOGGER.error("Categoría no encontrada.");
+            return "redirect:/errorPage"; // O cualquier página de error apropiada
+        }
+
+        if (stock == null) {
+            LOGGER.error("Stock no encontrado.");
+            return "redirect:/errorPage"; // O cualquier página de error apropiada
+        }
+
+        products.setCategory(category);
+        products.setStock(stock);
+
+        // Guardar el producto
         productService.save(products);
         return "redirect:/productos";
     }
@@ -89,6 +122,10 @@ public class ProductoController {
         LOGGER.info("Producto buscado: {}", products);
         model.addAttribute("products", products);
 
+        List<StockMatPri> stocks = stockService.findAll();
+        List<Category> categories = categoryService.findAll();
+        model.addAttribute("stocks", stocks);
+        model.addAttribute("category", categories);
         return "productos/edit";
     }
     @PostMapping("/update")

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -71,4 +72,12 @@ public class StockController {
         stockService.delete(idStockMat);
         return "redirect:/stock";
     }
+//    @GetMapping("/stocks")
+//    public String mostrarStocks(Model model) {
+//
+//        List<StockMatPri> listaStock = stockService.findAll();
+//        model.addAttribute("listaStock", listaStock);
+//
+//        return "productos/create";
+//    }
 }

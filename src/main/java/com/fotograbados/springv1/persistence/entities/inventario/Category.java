@@ -36,7 +36,7 @@ public class Category {
 
                                    //RELATIONS
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Products> products;
 
     @ManyToOne

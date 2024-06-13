@@ -38,11 +38,11 @@ public class Products {
                                             //RELATIONS
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_stockMat", referencedColumnName = "id_stockMat", insertable = false, updatable = false)
+    @JoinColumn(name = "id_stockMat", referencedColumnName = "id_stockMat")
     private StockMatPri stock;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_categoria", referencedColumnName = "id_categoria", insertable = false, updatable = false)
+    @JoinColumn(name = "id_categoria", referencedColumnName = "id_categoria")
     private Category category;
 
     @OneToOne(mappedBy = "products")

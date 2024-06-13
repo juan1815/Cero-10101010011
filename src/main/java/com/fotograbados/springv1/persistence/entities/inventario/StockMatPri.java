@@ -29,7 +29,7 @@ public class StockMatPri {
     @ManyToOne(fetch = FetchType.LAZY)
     private Users usuario;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Products products;
+    @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Products> products;
 
 }
