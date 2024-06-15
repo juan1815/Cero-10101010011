@@ -10,12 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-
-import java.util.Optional;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/usuario")
@@ -25,11 +20,14 @@ public class UsuarioController {
     @Autowired
     private IUsuarioService usuarioService;
 
+
+
     //BCryptPasswordEncoder passEncode= new BCryptPasswordEncoder();
     //@GetMapping("/registro")
     //public String create() {
       //  return "Login/registro";
     //}
+
 
     
     @GetMapping("/login")
@@ -82,6 +80,7 @@ public class UsuarioController {
 //
 //        return "redirect:/login";
 //    }
+
 
     //CLOSE SESSION
     @GetMapping("/cerrar")

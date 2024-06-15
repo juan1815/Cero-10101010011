@@ -23,7 +23,7 @@ public class OperadorController {
     @Autowired
     private IOrderService orderService;
 
-    @GetMapping("")
+    @GetMapping("/BLA")
     public String home(Model model) {
         List<Products> products = productService.findAll();
         model.addAttribute("productos", products);

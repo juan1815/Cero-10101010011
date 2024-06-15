@@ -63,7 +63,7 @@
         <div class="form-group">
           <label class="control-label col-sm-2" for="idCategoria">Categoria:</label>
           <div class="col-sm-10">
-            <select class="form-control" id="idCategoria" name="idCategoria">
+            <select v>
               <option value="">Seleccione una Categoria</option>
               <option th:each="category : ${category}" th:value="${category.tipoCategoria}">
                 <span th:text="${category.tipoCategoria}"></span>

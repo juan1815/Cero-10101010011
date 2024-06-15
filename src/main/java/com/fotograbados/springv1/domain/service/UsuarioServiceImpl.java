@@ -5,9 +5,12 @@ import com.fotograbados.springv1.persistence.entities.RolEntity;
 import com.fotograbados.springv1.persistence.entities.Users;
 import com.fotograbados.springv1.persistence.repository.RolRepository;
 import com.fotograbados.springv1.persistence.repository.UsuarioRepository;
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -45,7 +48,8 @@ import java.util.Optional;
 		return usuarioRepository.save(user);
 	}
 
-	@Override
+
+		@Override
 	@Transactional
 	public Users updateRole(Long userId, String newRole) {
 		Users user = usuarioRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));

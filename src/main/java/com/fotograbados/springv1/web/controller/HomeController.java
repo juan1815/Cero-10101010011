@@ -19,7 +19,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
-@RequestMapping("/home")
+@RequestMapping("/")
 public class HomeController {
 
     //Resources service
@@ -35,6 +35,10 @@ public class HomeController {
 
                     //ANNOTATIONS
     @GetMapping("")
+    public String ladingp(){
+        return "usuario/lading";
+    }
+    @GetMapping("/home")
     public String home(Model model, HttpSession session){
         log.info("sesion del usuario: {}", session.getAttribute("idUsuario"));
 
@@ -43,6 +47,10 @@ public class HomeController {
         //model.addAttribute("sesion", session.getAttribute("idusuario"));
 
         return "usuario/home";
+    }
+    @GetMapping("/review")
+    public String review(){
+        return "usuario/review";
     }
 
     @GetMapping("/productosShow/{idProducto}")

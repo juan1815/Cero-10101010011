@@ -9,8 +9,10 @@ import java.util.Optional;
 
 public interface IUsuarioService {
 	List<Users> findAll();
+
 	Optional<Users> findById(Long id);
-	Users save (Users user);
+
+	Users save(Users user);
 	Users updateRole(Long userId, String newRole);
 	Optional<Users> findByEmail(String email);
 
