@@ -28,8 +28,6 @@ public class UsuarioController {
       //  return "Login/registro";
     //}
 
-
-    
     @GetMapping("/login")
     public String login() {
         return "usuario/log-in";
@@ -44,12 +42,12 @@ public class UsuarioController {
 
         return "redirect:/usuario/login";
     }
-
     @PostMapping("/updateRole")
     public String updateRole(@RequestParam Long userId, @RequestParam String newRole) {
         usuarioService.updateRole(userId, newRole);
         return "redirect:/admin/usuarios";
     }
+
 
 //    @GetMapping("/acceder")
 //    public String acceder(Users users, HttpSession session) {
@@ -80,7 +78,6 @@ public class UsuarioController {
 //
 //        return "redirect:/login";
 //    }
-
 
     //CLOSE SESSION
     @GetMapping("/cerrar")

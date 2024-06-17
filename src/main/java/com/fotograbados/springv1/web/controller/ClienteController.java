@@ -52,6 +52,11 @@ public class ClienteController {
     }
     //END PURCHASE
 
+    @GetMapping("/info")
+    public String info(){
+        return "usuario/info";
+    }
+
 
 
 }

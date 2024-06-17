@@ -10,23 +10,27 @@
     <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
-    <link th:href="@{css/answercli.css}" rel="stylesheet">
+    <link th:href="@{/css/answercli.css}" rel="stylesheet">
 </head>
 <body>
-
-
 <!-- Navigation -->
 <div th:insert="~{administrador/template_admin.html::header}"></div>
 
 <!-- Page Content -->
 <div class="container">
     <div class="encuesta">
-        <h2>Encuesta de satisfacción</h2>
-        <p>Por favor, califica tu experiencia con el sistema:</p>
-        <form th:action="@{/encuesta/saveQ}" method="post">
+        <h1 class="mt-4 mb-3">
+            Fotograbados LTDA <small>Por favor, califica tu experiencia con el sistema:</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item active">Calificar experiencia</li>
+        </ol>
+
+        <form th:action="@{/encuesta/saveQ}" method="post" class="table">
             <div th:each="question : ${questions}">
-                <label th:for="${'question' + question.id}" th:text="${question.texto}"></label>
-                <select th:id="${'question' + question.id}" th:name="${'question' + question.id}">
+                <label th:for="${'question' + question.idPregunta}" th:text="${question.pregunta}"></label>
+                <select th:id="${'question' + question.idPregunta}" th:name="${'question' + question.idPregunta}">
                     <option value="1">Muy mala</option>
                     <option value="2">Mala</option>
                     <option value="3">Regular</option>

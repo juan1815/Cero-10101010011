@@ -85,7 +85,7 @@ public class EncuestaSatisfaccionController {
     private String showAnswer(Model model){
         List<QuestionSatisfactionSur> questions = questionService.findAll();
         model.addAttribute("questions", questions);
-        return "encuesta/showenc";
+        return "encuesta/answercli";
     }
     @PostMapping("/answer")
     private String answerEncuesta(AnswerSatisfactionSur satisfactionSur, HttpSession session){

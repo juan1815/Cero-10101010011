@@ -23,14 +23,13 @@ body {
     text-decoration: none;
     margin: center;
 }
-/*
-.card {
-  margin: auto;
-  width: 80%;
+.container .avatar{
+    width: 60px;
+    height: 60px;
+    border-radius: 70%;
+    position: left;
+    top: -10px;
+    left: calc(50% - 50px);
 }
-.table-container {
-  display: flex;
-  justify-content: center;
-} **/
 
 
