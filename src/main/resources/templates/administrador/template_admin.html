@@ -5,7 +5,7 @@
 
 			<!-- we add a adrresing the home -->
 			<a class="navbar-brand" th:href="@{/administrador}">Fotograbados LTDA</a>
-
+			<img th:src="@{/images/Logo.jpg}" alt="Logo" class="avatar">
 
 
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -25,6 +25,7 @@
 								aria-labelledby="navbarDropdownMenuLink">
 
 								 <!--we add the addresing the action on the controller  -->
+								<a class="dropdown-item" th:href="@{/administrador/info}">información</a>
 								<a class="dropdown-item" th:href="@{/usuario/cerrar}">Salir</a>
 							</div></li>
 				</ul>

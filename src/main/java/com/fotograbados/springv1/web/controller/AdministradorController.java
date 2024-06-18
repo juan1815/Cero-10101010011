@@ -54,7 +54,10 @@ public class AdministradorController {
         model.addAttribute("opinionProducts", opinionService.findAll());
         return "administrador/reseñas";
     }
-
+    @GetMapping("/info")
+    public String info(){
+        return "administrador/info";
+    }
     @GetMapping("/detalle/{id}")
     public String detalle(Model model, @PathVariable Long idOrder) {
         logg.info("Id de la orden {}",idOrder);

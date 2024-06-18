@@ -6,11 +6,11 @@ import lombok.Getter;
 import java.util.Date;
 @Data
 public class TotalSalesPerDayDTO  {
+    private int idProduct;
+    private String product;
     private int year;
     private int month;
     private int day;
     private double totalSales;
-
-
 }
 

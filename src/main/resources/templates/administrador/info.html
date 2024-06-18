@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Link the resources  -->
+    <link rel="stylesheet" th:href="@{https://pro.fontawesome.com/releases/v5.10.0/css/all.css}" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <!-- Body CSS -->
+    <link rel="stylesheet" th:href="@{/css/info.css}">
+    <!-- Bootstrap core CSS -->
+    <link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
+</head>
+<body>
+<!-- Navigation -->
+<div th:insert="~{administrador/template_admin.html::header}" ></div>
+<section class="perfil-usuario">
+    <div class="contenedor-perfil" id="mostrador">
+        <div class="portada-perfil" style="background-image: url('../img/');">
+            <div class="sombra"></div>
+            <div class="avatar-perfil">
+                <img src="../img/foto1Reseña.jpg" alt="img">
+                <a href="#" class="cambiar-foto">
+                    <i class="fas fa-camera"></i>
+                    <span>Cambiar foto</span>
+                </a>
+            </div>
+            <div class="datos-perfil">
+                <h4 class="titulo-usuario">Pablo Hernandez</h4>
+                <p class="bio-usuario">Cliente clasista.</p>
+            </div>
+            <div class="opcciones-perfil">
+                <button type="">Cambiar portada</button>
+                <button type=""><i class="fas fa-wrench"></i></button>
+            </div>
+        </div>
+
+        <div class="menu-perfil" onclick="cargar(this)">
+            <ul>
+                <li><a href="#" title=""><i class="icono-perfil fas fa-bullhorn"></i> Pedidos en curso</a></li>
+
+                <li class="descripcion"><a href="#" title=""><i class="icono-perfil fas fa-info-circle"></i>Cotizaciones</a></li>
+
+                <li class="descripcion"><a href="../index.html" title=""><i class="icono-perfil fas fa-grin"></i>PQRS</a></li>
+
+                <li class="descripcion"><a href="#" title=""><i class="icono-perfil fas fa-grin"></i> Informacion de usuario</a></li>
+
+                <li class="descripcion"><a href="#" title=""><i class="icono-perfil fas fa-grin"></i>Pagina de compra</a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+<!-- Footer -->
+<div th:include="usuario/template_usuario.html::footer"></div>
+</body>
+<!-- Bootstrap core JavaScript -->
+<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</html>
+
