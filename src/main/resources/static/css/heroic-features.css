@@ -13,15 +13,17 @@ body {
         #09f,
         #00DDFF
   );
-    border-radius: 8px;
-    color: #ffff;
+    border-radius: 8px;x
     display: inline-block;
-    font-size: 18px;
     padding: 15px;
     cursor: pointer;
     transition: .3s;
-    text-decoration: none;
     margin: center;
+}
+.btn-success a{
+    text-decoration: none;
+    color: #ffff;
+    font-size: 18px;
 }
 .container .avatar{
     width: 60px;
@@ -30,6 +32,15 @@ body {
     position: left;
     top: -10px;
     left: calc(50% - 50px);
+}
+.btn-success i {
+    font-size: 25px;
+    color: #266371;
+    margin-right: 15px;
+    cursor: pointer;
+}
+.btn-success i:hover {
+    color: #266371;
 }
 
 

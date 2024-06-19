@@ -7,29 +7,11 @@
 			<a class="navbar-brand" th:href="@{/administrador}">Fotograbados LTDA</a>
 			<img th:src="@{/images/Logo.jpg}" alt="Logo" class="avatar">
 
-
 			<button class="navbar-toggler" type="button" data-toggle="collapse"
 				data-target="#navbarResponsive" aria-controls="navbarResponsive"
 				aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					
-					<li class="nav-item dropdown"><a
-							class="nav-link dropdown-toggle" href="#"
-							id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
-							aria-haspopup="true" aria-expanded="false"> ADMIN </a>
-							
-							<div class="dropdown-menu"
-								aria-labelledby="navbarDropdownMenuLink">
-
-								 <!--we add the addresing the action on the controller  -->
-								<a class="dropdown-item" th:href="@{/administrador/info}">información</a>
-								<a class="dropdown-item" th:href="@{/usuario/cerrar}">Salir</a>
-							</div></li>
-				</ul>
-			</div>
 			<div class="collapse navbar-collapse" id="navbarResponsive1">
 				<ul class="navbar-nav ml-auto">
 
@@ -71,9 +53,28 @@
 
 							<a class="dropdown-item" th:href="@{/administrador/ordenes}">Ordenes</a>
 
-						</div></li>
+						</div>
+					</li>
 				</ul>
-			</div>x
+			</div>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+
+					<li class="nav-item dropdown"><a
+							class="nav-link dropdown-toggle" href="#"
+							id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
+							aria-haspopup="true" aria-expanded="false"> ADMIN </a>
+
+						<div class="dropdown-menu"
+							 aria-labelledby="navbarDropdownMenuLink">
+
+							<!--we add the addresing the action on the controller  -->
+							<a class="dropdown-item" th:href="@{/administrador/info}">información</a>
+							<a class="dropdown-item" th:href="@{/usuario/cerrar}">Salir</a>
+						</div>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</nav>
 
@@ -85,8 +86,28 @@
 <div th:fragment="footer">
 	<footer class="py-5 bg-dark">
 		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; Spring
-				eCommerce 2021</p>
+			<p class="m-0 text-center text-white">FOTOGRABADOS LTDA</p>
+			<div class="box-containe">
+				<h2 class="title">Nuestro Contacto</h2>
+				<div class="icons">
+					<a href="https://www.facebook.com/Fotograbadosda/photos" target="_blank">
+						<i class="fa-brands fa-facebook"></i>
+						<p class="m-0 text-center text-white">Facebook</p>
+					</a>
+				</div>
+				<div class="icons">
+					<a href="https://www.instagram.com/fotograbadosda?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+						<i class="fa-brands fa-instagram"></i>
+						<p class="m-0 text-center text-white">Instagram</p>
+					</a>
+				</div>
+				<div class="icons">
+					<a href="https://wa.me/573118829330" target="_blank">
+						<i class="fa-brands fa-whatsapp"></i>
+						<p class="m-0 text-center text-white">Whatsapp</p>
+					</a>
+				</div>
+			</div>
 		</div>
 		<!-- /.container -->
 	</footer>

@@ -18,6 +18,9 @@
 <!-- Custom styles for this template -->
 <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
 
+  <!-- Link the resources  -->
+  <link rel="stylesheet" th:href="@{https://pro.fontawesome.com/releases/v5.10.0/css/all.css}" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+
 </head>
 
 <body>
@@ -55,9 +58,16 @@
       </tr>       
     </tbody>
   </table>
+  <div class="col-sm-2">
+    <button type="submit" class="btn btn-success">
+      <a th:href="@{/pdf/usuarios}" target="_blank">Descargar Reporte Pdf
+        <i class="fa fa-file"></i>
+      </a>
+    </button>
+  </div>
 
-</div>
-<!-- /.container -->
+    </div>
+      <!-- /.container -->
 
 	<!-- Bootstrap core JavaScript -->
 	<script th:src="@{/vendor/jquery/jquery.min.js}"></script>

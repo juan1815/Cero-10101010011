@@ -169,6 +169,21 @@ body {
     display: none;
     margin-right: .75rem;
 }
+.icons {
+    display: flex;
+}
+.icons i {
+    font-size: 25px;
+    color: #fff;
+    margin-right: 15px;
+    cursor: pointer;
+}
+.icons i:hover {
+    color: #266371;
+}
+.icons a{
+  text-decoration: none;
+}
 /* para el tamaño de moviles */
 @media (max-width: 780px) {
     .perfil-usuario .contenedor-perfil {

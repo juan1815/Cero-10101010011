@@ -4,6 +4,7 @@ import com.fotograbados.springv1.domain.service.IUsuarioService;
 import com.fotograbados.springv1.domain.service.agc.IOpinionService;
 import com.fotograbados.springv1.domain.service.gproducto.IProductService;
 import com.fotograbados.springv1.domain.service.ventas.IOrderService;
+import com.fotograbados.springv1.persistence.entities.Users;
 import com.fotograbados.springv1.persistence.entities.inventario.Products;
 import com.fotograbados.springv1.persistence.entities.ventas.OrderEntity;
 import org.slf4j.*;
