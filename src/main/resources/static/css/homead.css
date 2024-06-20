@@ -10,20 +10,22 @@
 }
 
 :root {
-    --blue: #d1e3f0;
-    --white: #f4f4f4;
+    --coffee: #B5A072;
+    --blue: #7DAFA9;
+    --white: #F9F6F7;
     --gray: #d1d1d1;
     --black1: #222;
-    --black2: #77B912;
+    --black2: #383034;
     --orange: #FFAE00;
     --red: #FF0000;
     --Gray: #7C7777;
+    --salmon: #A694AA;
 }
 
 body {
     min-height: 100vh;
     overflow-x: hidden;
-    background: var(--white);
+    background: var(--salmon);
 }
 
 .container {
@@ -57,12 +59,13 @@ body {
     width: 100%;
     list-style: none;
     border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px; 
+    border-bottom-left-radius: 20px;
+    /*margin-bottom: 20px; */
 }
 
 .navigation ul li:hover,
 .navigation ul li.hovered {
-    background-color: var(--white);
+    background-color: var(--salmon);
 }
 
 .navigation ul li:nth-child(1) {
@@ -76,12 +79,12 @@ body {
     width: 100%;
     display: flex;
     text-decoration: none;
-    color: var(--white);
+    color: var(--black1);
 }
 
 .navigation ul li:hover a,
 .navigation ul li.hovered a {
-    color: var(--blue);
+    color: var(--white);
 }
 
 .navigation ul li a .icon {
@@ -117,7 +120,7 @@ body {
     height: 50px;
     background-color: transparent;
     border-radius: 25px;
-    box-shadow: 2px 5px 0 10px var(--white);
+    box-shadow: 2px 5px 0 10px var(--black1);
     pointer-events: none;
 }
 
@@ -131,9 +134,16 @@ body {
     height: 50px;
     background-color: transparent;
     border-radius: 25px;
-    box-shadow: 0px 0px 0 0px var(--white);
+    box-shadow: 0px 0px 0 0px var(--black1);
     pointer-events: none;
 }
+
+
+
+
+
+
+
 
 /* Main */
 .main {
@@ -141,7 +151,7 @@ body {
     width: calc(100% - 300px);
     left: 300px;
     min-height: 100vh;
-    background: var(--white);
+    background: var(--salmon);
     transition: 0.5s;
     padding: 20px;  
 }
@@ -268,6 +278,7 @@ body {
 
 .cardHeader h2 {
     font-weight: 600;
+
     color: var(--black1);
 }
 

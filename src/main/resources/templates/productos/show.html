@@ -40,31 +40,32 @@
 
    <!-- we add a addresing and fuction of the create -->
   <a class="btn btn-primary" th:href="@{/productos/create}" > Crear Producto</a>
-  <h2>Productos</h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th scope="col">Nombre</th>
-        <th scope="col">Descripción</th>
-        <th scope="col">Inventario</th>
-        <th scope="col">Precio</th>
-        <th scope="col">Acción</th>
-        <th scope="col">Acción</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- to define of fuction and place where it get the information and fuction -->
-      <tr th:each="producto:${products}">
-        <td th:text="${producto.nombreProducto}"></td>
-        <td th:text="${producto.descripcion}"></td>
-        <td th:text="${producto.cantidad}"></td>
-        <td th:text="${producto.precio}"></td>
-        <td><a  class="btn btn-warning" th:href="@{productos/edit/{idProducto} (idProducto=${producto.idProducto}) }">Editar</a> </td>
-        <td><a  class="btn btn-danger" th:href="@{productos/delete/{idProducto} (idProducto=${producto.idProducto}) }">Eliminar</a> </td>
-      </tr>       
-    </tbody>
-  </table>
-
+  <div class="container-two">
+    <h2>Productos</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Inventario</th>
+          <th scope="col">Precio</th>
+          <th scope="col">Acción</th>
+          <th scope="col">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- to define of fuction and place where it get the information and fuction -->
+        <tr th:each="producto:${products}">
+          <td th:text="${producto.nombreProducto}"></td>
+          <td th:text="${producto.descripcion}"></td>
+          <td th:text="${producto.cantidad}"></td>
+          <td th:text="${producto.precio}"></td>
+          <td><a  class="btn btn-warning" th:href="@{productos/edit/{idProducto} (idProducto=${producto.idProducto}) }">Editar</a> </td>
+          <td><a  class="btn btn-danger" th:href="@{productos/delete/{idProducto} (idProducto=${producto.idProducto}) }">Eliminar</a> </td>
+        </tr>       
+      </tbody>
+    </table>
+  </div>
 </div>
 
  <!-- Bootstrap core JavaScript -->

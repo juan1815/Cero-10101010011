@@ -1,5 +1,13 @@
+:root {
+  --gray: #828489;
+  --black: #111;
+  --white2: #F9F6F7;
+  --green: #222B23;
+}
+
 body {
   padding-top: 56px;
+  background: var(--gray);
 }
 
 
@@ -7,23 +15,19 @@ body {
   background-color: black;
 }
 .btn-success{
-  background-image: linear-gradient(
-        150deg,
-        #9500ff,
-        #09f,
-        #00DDFF
-  );
-    border-radius: 8px;x
+  background-color: var(--green);
+    border-radius: 8px;
     display: inline-block;
     padding: 15px;
     cursor: pointer;
     transition: .3s;
-    margin: center;
+    margin: auto;
 }
 .btn-success a{
     text-decoration: none;
-    color: #ffff;
-    font-size: 18px;
+    color: var(--white2);
+    font-size: 24px;
+    margin: auto; 
 }
 .container .avatar{
     width: 60px;
@@ -35,12 +39,12 @@ body {
 }
 .btn-success i {
     font-size: 25px;
-    color: #266371;
+    color: #712626;
     margin-right: 15px;
     cursor: pointer;
 }
 .btn-success i:hover {
-    color: #266371;
+    color: #712626;
 }
 
 

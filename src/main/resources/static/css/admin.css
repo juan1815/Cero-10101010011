@@ -10,7 +10,7 @@
 }
 
 :root {
-    --blue: #16D8F3;
+    --blue: #ADB5A7;
     --white: #fff;
     --gray: #f5f5f5;
     --black1: #222;
@@ -22,11 +22,6 @@
 body {
     min-height: 100vh;
     overflow-x: hidden;
-    /* background-image: url(/proyect/img/fondo_dashboard.avif);
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position:relative;
-    background-attachment: fixed; */
 }
 .container {
     position: relative;
@@ -69,7 +64,6 @@ overflow-y: auto;
 }
 .navigation ul li:nth-child(1) {
     margin-bottom: 40px;
-    /* pointer-events: none; dice que desabilita la interracion de arriba */
 }
 /* color de letras */
 .navigation ul li a {
@@ -151,7 +145,6 @@ overflow-y: auto;
     min-height: 100vh;
     background: var(--white);
     transition: 0.5s;
-    background-image: url(/proyect/img/fechar-os-detalhes-da-textura-do-filme.jpg);
 }
 
 .main.active {

@@ -18,9 +18,10 @@ body {
 .header {
     background-image: linear-gradient(
         150deg,
-        #9500ff,
-        #09f,
-        #00DDFF
+        #3a0b5b,
+        #9377C9,
+        #D5D2FA,
+        #EAE8E6
   );
     background-size: cover;
     display: flex;
