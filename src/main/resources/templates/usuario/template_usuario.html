@@ -88,28 +88,18 @@
         <!-- Footer -->
 	<div th:fragment="footer">
 		<footer class="py-5 bg-dark">
-			<div class="container">
-				<p class="m-0 text-center text-white"> FOTOGRABADOS LTDA</p>
-                <div class="box-containe">
-                    <h2 class="title">Contacto</h2>
-                    <div class="icons">
-                        <a href="https://www.facebook.com/Fotograbadosda/photos" target="_blank">
-                            <i class="fa-brands fa-facebook"></i>
-                            <p class="m-0 text-center text-white">Facebook</p>
-                        </a>
-                    </div>
-                    <div class="icons">
-                        <a href="https://www.instagram.com/fotograbadosda?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
-                            <i class="fa-brands fa-instagram"></i>
-                            <p class="m-0 text-center text-white">Instagram</p>
-                        </a>
-                    </div>
-                    <div class="icons">
-                        <a href="https://wa.me/573118829330" target="_blank">
-                            <i class="fa-brands fa-whatsapp"></i>
-                            <p class="m-0 text-center text-white">Whatsapp</p>
-                        </a>
-                    </div>
+            <div class="footer-content">
+                <img th:src="@{/images/Logo.jpg}" alt="Logo foto" class="logo">
+                <div class="social-icons">
+                    <a href="https://www.facebook.com/Fotograbadosda/photos" target="_blank"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="https://wa.me/573118829330" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+                    <a href="https://www.instagram.com/fotograbadosda?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+                <div class="info">
+                    <p>Fotograbados LTDA</p>
+                    <p>CALLE 19 OESTE 8 A BIS 147, CALI - VALLE - Colombia.</p>
+                    <p>Comunicarse: Teléfono 57+ 317 400 4727</p>
+                    <p>fotograbadosda2017@gmail.com</p>
                 </div>
             </div>
 		</footer>

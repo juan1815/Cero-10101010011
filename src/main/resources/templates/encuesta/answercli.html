@@ -11,6 +11,8 @@
     <!-- Custom styles for this template -->
     <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
     <link th:href="@{/css/answercli.css}" rel="stylesheet">
+    <!--Font awesome -->
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
 <!-- Navigation -->
@@ -56,7 +58,8 @@
         </div>
     </div>
 </div>
-
+<!-- Footer -->
+<div th:include="usuario/template_usuario.html::footer"></div>
 <!-- Bootstrap core JavaScript -->
 <script th:src="@{/vendor/jquery/jquery.min.js}"></script>
 <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>

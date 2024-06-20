@@ -46,5 +46,35 @@ body {
 .btn-success i:hover {
     color: #712626;
 }
+/**/
+.footer-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.logo {
+   width: 150px;
+   height: 150px;
+   border-radius: 70%;
+}
 
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icons a {
+  color: white;
+  text-decoration: none;
+  font-size: 36px;
+}
+
+.info {
+  text-align: left;
+}
+
+.info p {
+  margin-bottom: 5px;
+  color: var(--white2);
+}
 

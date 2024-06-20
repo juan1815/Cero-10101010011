@@ -117,20 +117,21 @@ public class SaleController {
 
     @GetMapping("/order")
     public String order(Model model, HttpSession session) {
-        Object idUsuarioObj = session.getAttribute("idusuario");
-        if (idUsuarioObj == null) {
-            log.error("idusuario no presente en la sesión");
-            return "redirect:/usuario/log-in";
-        }
+//        Object idUsuarioObj = session.getAttribute("idusuario");
+//        if (idUsuarioObj == null) {
+//            log.error("idusuario no presente en la sesión");
+//            return "redirect:/usuario/log-in";
+//        }
+//
+//        Long idUsuario = Long.parseLong(usuarioService.toString());
+//        Optional<Users> optionalUser = usuarioService.findById(idUsuario);
+//        if (!optionalUser.isPresent()) {
+//            log.error("Usuario no encontrado con id: {}", idUsuario);
+//            return "error"; // O redirige a una página de error adecuada
+//        }
 
-        Long idUsuario = Long.parseLong(idUsuarioObj.toString());
-        Optional<Users> optionalUser = usuarioService.findById(idUsuario);
-        if (!optionalUser.isPresent()) {
-            log.error("Usuario no encontrado con id: {}", idUsuario);
-            return "error"; // O redirige a una página de error adecuada
-        }
-
-        Users users = optionalUser.get();
+        Users users = new Users();
+//        Users users = optionalUser.get();
         model.addAttribute("cart", detalles);
         model.addAttribute("orden", order);
         model.addAttribute("usuario", users);

@@ -22,21 +22,6 @@ public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
                     "ORDER BY year, month, product_id;")
     List<ProductSalesPerMonthDTO> findProductSalesPerMonth();
 
-    //Sales Month
-    @Query(nativeQuery = true,
-            value = "SELECT YEAR(o.fecha_venta) AS year, MONTH(o.fecha_venta) AS month, SUM(o.total) AS total_ventas " +
-                    "FROM order_entity o " +
-                    "GROUP BY YEAR(o.fecha_venta), MONTH(o.fecha_venta) " +
-                    "ORDER BY year, month;")
-    List<TotalSalesPerMonthDTO> findTotalSalesPerMonth();
-
-    @Query(nativeQuery = true,
-            value = "SELECT YEAR(o.fecha_venta) AS year, MONTH(o.fecha_venta) AS month, DAY(o.fecha_venta) AS day, SUM(o.total) AS total_ventas " +
-                    "FROM order_entity o " +
-                    "GROUP BY YEAR(o.fecha_venta), MONTH(o.fecha_venta), DAY(o.fecha_venta) " +
-                    "ORDER BY year, month, day;")
-    List<TotalSalesPerDayDTO> findTotalSalesPerDay();
-
             //Sales for Region
     @Query(nativeQuery = true,
             value = "SELECT r.region_name AS region_name, u.tipo AS customer_type, u.codigo_postal AS postal_code, COUNT(*) AS customer_count " +

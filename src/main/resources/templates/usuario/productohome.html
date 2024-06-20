@@ -45,30 +45,26 @@
 			<div class="card-body">
 				<div class="row">
 					<div class="col-lg-6">
-						<a href="#"> <img class="img-fluid rounded" th:src="@{/images/{img}(img=${products.imagen})}
-							" alt="">
+						<a href="#">
+							<img class="img-fluid rounded" th:src="@{/images/{img}(img=${products.imagen})}" alt="">
 						</a>
 					</div>
 					<div class="col-lg-6">
 						<form th:action="@{/sale/cart}" method="POST">
-						<input type="hidden" th:value="${products.id_producto}" name="id_producto">
-							<h2 class="card-title" th:text="${products.nombre_producto}"></h2>
-
+							<input type="hidden" th:value="${products.idProducto}" name="idProduct">
+							<h2 class="card-title" th:text="${products.nombreProducto}"></h2>
 							<ul class="list-group">
 								<li class="list-group-item"><h5 th:text=" 'Precio: '+ ${products.precio} "></h5></li>
 								<li class="list-group-item">
 									<p th:text=" 'Descripción: '+ ${products.descripcion} "></p>
 								</li>
-								<li class="list-group-item"><h6>
-										Cantidad: <input type="number" id="cantidad" name="cantidad"
-											autocomplete="off" min="1" max="5" value="1">
-									</h6></li>
+								<li class="list-group-item">
+									<h6>Cantidad:
+										<input type="number" id="cantidad" name="cantidad" autocomplete="off" min="1" max="5" value="1">
+									</h6>
+								</li>
 							</ul>
-
-
-							<button type="submit" class="btn btn-dark">Añadir al
-								carrito</button>
-
+							<button type="submit" class="btn btn-dark">Añadir al carrito</button>
 						</form>
 					</div>
 				</div>

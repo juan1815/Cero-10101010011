@@ -11,6 +11,8 @@
 	<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 	<!-- Custom styles for this template -->
 	<link th:href="@{/css/heroic-features.css}" rel="stylesheet">
+	<!--Font awesome -->
+	<link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
@@ -31,6 +33,7 @@
 	</ol>
 
 	<!-- Blog Post -->
+	<!-- Blog Post -->
 	<div class="card mb-4">
 		<div class="card-body">
 			<div class="row">
@@ -46,27 +49,34 @@
 						</tr>
 						</thead>
 						<tbody>
+						<!-- Iterar sobre cada item del carrito -->
 						<tr th:each="dorden : ${cart}">
-							<td th:text="${dorden.nombre}"></td>
-							<td th:text="${dorden.precio}"></td>
-							<td th:text="${dorden.cantidad}"></td>
-							<td th:text="${dorden.total}"></td>
-							<td><a th:href="@{/sale/delete/cart/{id}(id=${dorden.producto.id})}" class="btn btn-danger">Quitar</a></td>
+							<td th:text="${dorden.productoNombre}"></td> <!-- Asegúrate de usar productoNombre si es así como lo has definido en BillEntity -->
+							<td th:text="${dorden.costoUnidad}"></td> <!-- Precio unitario -->
+							<td th:text="${dorden.cantidad}"></td> <!-- Cantidad -->
+							<td th:text="${dorden.total}"></td> <!-- Total por item -->
+							<td>
+								<!-- Enlace para eliminar producto del carrito -->
+								<a th:href="@{/sale/delete/cart/{idProducto}(idProducto=${dorden.producto.idProducto})}" class="btn btn-danger">Quitar</a>
+								</a>
+							</td>
 						</tr>
 						</tbody>
 					</table>
 				</div>
 
 				<div class="col-lg-3">
+					<!-- Columna para mostrar subtotal y acción para ver orden -->
 					<h2 class="card-title">SUBTOTAL</h2>
 					<ul class="list-group">
-						<li class="list-group-item"><h5 th:text="${orden.total}"></h5></li>
-						<a th:href="@{/sale/order}" class="btn btn-dark">Ver Orden</a>
+						<li class="list-group-item"><h5 th:text="${orden.total}"></h5></li> <!-- Mostrar total del pedido -->
+						<a th:href="@{/sale/order}" class="btn btn-dark">Ver Orden</a> <!-- Enlace para proceder a ver la orden completa -->
 					</ul>
 				</div>
 			</div>
 		</div>
 	</div>
+
 
 	<!-- Feedback Section -->
 	<div class="card mb-4">
