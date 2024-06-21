@@ -20,7 +20,7 @@ import java.util.List;
 public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column (name = "id_purchase", nullable = false)
+    @Column (name = "id_purchase")
     private  Integer  idOrder;
 
     private String numero;
@@ -31,13 +31,10 @@ public class OrderEntity {
     @Column(name = "fecha_envio")
     private Date fechaEnvio;
 
-    @Column(nullable = false)
     private Double descuento;
 
-    @Column(nullable = false)
     private String estado;
 
-    @Column(nullable = false)
     private double total;
 
                     //RELATIONS

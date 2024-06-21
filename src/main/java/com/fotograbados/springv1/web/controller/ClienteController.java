@@ -1,6 +1,7 @@
 package com.fotograbados.springv1.web.controller;
 
 import com.fotograbados.springv1.domain.service.IUsuarioService;
+import com.fotograbados.springv1.domain.service.UploadFileService;
 import com.fotograbados.springv1.domain.service.ventas.IOrderService;
 import com.fotograbados.springv1.persistence.entities.RolEntity;
 import com.fotograbados.springv1.persistence.entities.Users;
@@ -10,10 +11,10 @@ import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,9 +22,11 @@ import java.util.Optional;
 @RequestMapping("/cliente")
 public class ClienteController {
 
-    private final Logger logger = LoggerFactory.getLogger(UsuarioController.class);
     @Autowired
     private IUsuarioService usuarioService;
+    @Autowired
+    private UploadFileService uploadFileService;
+    private final Logger LOGGER = LoggerFactory.getLogger(UsuarioController.class);
     @Autowired
     private IOrderService orderService;
     @GetMapping("/compras")
@@ -41,7 +44,7 @@ public class ClienteController {
 
     @GetMapping("/detalle/{idOrder}")
     public String detalleCompra(@PathVariable Long idOrder, HttpSession session, Model model) {
-        logger.info("Id de la orden: {}", idOrder);
+        LOGGER.info("Id de la orden: {}", idOrder);
         Optional<OrderEntity> order=orderService.findById(idOrder);
 
         model.addAttribute("detalles", order.get().getBill());
@@ -52,7 +55,7 @@ public class ClienteController {
         return "usuario/detallecompra";
     }
     //END PURCHASE
-
+    //INFO
     @GetMapping("/info")
     public String info(Model model){
         RolEntity rol = new RolEntity();
@@ -73,6 +76,19 @@ public class ClienteController {
         return "usuario/info";
     }
 
+    @PostMapping("/saveInfo")
+    public String saveInfo(@ModelAttribute Users users,
+                           @RequestParam("img") MultipartFile file,
+                           HttpSession session) throws IOException {
+        if (!file.isEmpty()) {
+            String nombreImagen = uploadFileService.saveImage(file);
+            users.setAvatar("/images/" + nombreImagen);
+        } else if (users.getId() == null) {
+            users.setAvatar("/images/default.jpg");
+        }
 
+        usuarioService.save(users);
+        return "redirect:/cliente/info";
+    }
 
 }

@@ -1,14 +1,19 @@
 package com.fotograbados.springv1.domain.service.ventas;
 
+import com.fotograbados.springv1.domain.dto.VentaMensual;
+import com.fotograbados.springv1.domain.dto.VentaProducto;
 import com.fotograbados.springv1.persistence.entities.Users;
 import com.fotograbados.springv1.persistence.entities.ventas.OrderEntity;
 import com.fotograbados.springv1.persistence.repository.ventas.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements IOrderService{
@@ -64,5 +69,29 @@ public class OrderServiceImpl implements IOrderService{
     @Override
     public List<OrderEntity> findByUsers(Users users) {
         return orderRepository.findByUsers(users);
+    }
+
+    public List<VentaMensual> obtenerVentasMensuales() {
+        List<OrderEntity> orders = orderRepository.findAll();
+        // Lógica para agrupar las ventas por mes y calcular el total
+        return orders.stream()
+                .collect(Collectors.groupingBy(order -> {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM");
+                    return order.getFechaVenta().toInstant().atZone(ZoneId.systemDefault()).format(formatter);
+                }, Collectors.summingDouble(OrderEntity::getTotal)))
+                .entrySet().stream()
+                .map(entry -> new VentaMensual(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
+    }
+
+    public List<VentaProducto> obtenerVentasPorProducto() {
+        List<OrderEntity> orders = orderRepository.findAll();
+        // Lógica para agrupar las ventas por producto y calcular el total
+        return orders.stream()
+                .flatMap(order -> order.getBill().stream())
+                .collect(Collectors.groupingBy(bill -> bill.getProducto().getNombreProducto(), Collectors.summingDouble(bill -> bill.getCantidad() * bill.getCostoUnidad())))
+                .entrySet().stream()
+                .map(entry -> new VentaProducto(entry.getKey(), entry.getValue()))
+                .collect(Collectors.toList());
     }
 }

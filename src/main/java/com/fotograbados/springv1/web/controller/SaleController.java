@@ -117,6 +117,7 @@ public class SaleController {
 
     @GetMapping("/order")
     public String order(Model model, HttpSession session) {
+
 //        Object idUsuarioObj = session.getAttribute("idusuario");
 //        if (idUsuarioObj == null) {
 //            log.error("idusuario no presente en la sesión");

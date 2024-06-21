@@ -1,5 +1,7 @@
 package com.fotograbados.springv1.web.controller;
 
+import com.fotograbados.springv1.domain.dto.VentaMensual;
+import com.fotograbados.springv1.domain.dto.VentaProducto;
 import com.fotograbados.springv1.domain.service.IUsuarioService;
 import com.fotograbados.springv1.domain.service.agc.IOpinionService;
 import com.fotograbados.springv1.domain.service.gproducto.IProductService;
@@ -33,7 +35,12 @@ public class AdministradorController {
 
     @GetMapping("")
     public String home(Model model) {
+        List<VentaMensual> ventaMensuals = orderService.obtenerVentasMensuales();
+        List<VentaProducto> ventaProductos = orderService.obtenerVentasPorProducto();
         List<Products> products = productService.findAll();
+
+        model.addAttribute("ventasMensuales", ventaMensuals);
+        model.addAttribute("ventaProducto", ventaProductos);
         model.addAttribute("productos", products);
         return "administrador/dashboard";
     }
