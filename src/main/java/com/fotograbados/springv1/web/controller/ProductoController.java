@@ -84,9 +84,10 @@ public class ProductoController {
         //}
     
 //        products.setUsuario(u);
-    
+
+        // Guardar la imagen y obtener el nombre
         if (products.getIdProducto() == null) {
-           String nombreImagen = uploadFileService.saveImage(file);
+            String nombreImagen = uploadFileService.saveImage(file);
             products.setImagen(nombreImagen);
         }
 
@@ -94,14 +95,9 @@ public class ProductoController {
         Category category = categoryService.get(idCategoria).orElse(null);
         StockMatPri stock = stockService.get(idStockMat).orElse(null);
 
-        if (category == null) {
-            LOGGER.error("Categoría no encontrada.");
-            return "redirect:/errorPage"; // O cualquier página de error apropiada
-        }
-
-        if (stock == null) {
-            LOGGER.error("Stock no encontrado.");
-            return "redirect:/errorPage"; // O cualquier página de error apropiada
+        if (category == null || stock == null) {
+            LOGGER.error("Categoría o Stock no encontrados.");
+            return "redirect:/errorPage"; // Maneja el error si la categoría o el stock no están disponibles
         }
 
         products.setCategory(category);
@@ -111,7 +107,6 @@ public class ProductoController {
         productService.save(products);
         return "redirect:/productos";
     }
-    
 
     @GetMapping("/edit/{idProducto}")
     public String edit(@PathVariable Long idProducto, Model model) {

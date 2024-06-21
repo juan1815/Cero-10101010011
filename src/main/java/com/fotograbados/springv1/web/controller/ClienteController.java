@@ -2,6 +2,7 @@ package com.fotograbados.springv1.web.controller;
 
 import com.fotograbados.springv1.domain.service.IUsuarioService;
 import com.fotograbados.springv1.domain.service.ventas.IOrderService;
+import com.fotograbados.springv1.persistence.entities.RolEntity;
 import com.fotograbados.springv1.persistence.entities.Users;
 import com.fotograbados.springv1.persistence.entities.ventas.OrderEntity;
 import jakarta.servlet.http.HttpSession;
@@ -53,7 +54,22 @@ public class ClienteController {
     //END PURCHASE
 
     @GetMapping("/info")
-    public String info(){
+    public String info(Model model){
+        RolEntity rol = new RolEntity();
+        rol.setIdRol(1L);
+        rol.setTipo("usuario");
+
+        Users users = new Users();
+        users.setNombre("pablo elvis tek");
+        users.setUsername("Pablo");
+        users.setEmail("pablo@gmail.com");
+        users.setAvatar("/custom-images/fotico.jpg");
+        users.setDireccion("calle41 # 34-21");
+        users.setCodigoPostal("2343");
+        users.setTelefono("32275581");
+        users.setRolEntity(rol);
+
+        model.addAttribute("usuario", users);
         return "usuario/info";
     }
 

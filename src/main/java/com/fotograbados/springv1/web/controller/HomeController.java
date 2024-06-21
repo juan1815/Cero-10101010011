@@ -42,9 +42,15 @@ public class HomeController {
     public String home(Model model, HttpSession session){
         log.info("sesion del usuario: {}", session.getAttribute("idUsuario"));
 
-        model.addAttribute("products", productService.findAll());
+        List<Products> products = productService.findAll();
+        log.info("Cantidad de productos encontrados: {}", products.size());
         //Session
         //model.addAttribute("sesion", session.getAttribute("idusuario"));
+        // Agrega logs para verificar los nombres de las imágenes
+        for (Products product : products) {
+            log.info("Nombre de imagen para producto {}: {}", product.getIdProducto(), product.getImagen());
+        }
+        model.addAttribute("products", products);
 
         return "usuario/home";
     }

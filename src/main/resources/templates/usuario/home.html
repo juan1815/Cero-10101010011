@@ -34,18 +34,23 @@
 		<!-- Jumbotron Header -->
 		<header class="jumbotron my-4">
 			<h1 class="display-3">Bienvenido a un mundo de diseños</h1>
-			<p class="lead">Echale un vistazo a nuestros servicios🕵️‍♂️</p>
-			<img th:src="@{/}">
+			<p class="lead">Echale un vistazo a nuestros servicios️</p>
+			<div class="social-icons	">
+				<a><i class="fa fa-paint-brush"></i></a>
+			</div>
 		</header>
 
 		<!-- Page Features -->
 		<div class="row text-center">
 			<div class="col-lg-3 col-md-6 mb-4" th:each="product : ${products}">
 				<div class="card h-100">
-					<img class="card-img-top" th:src="@{/images/{img}(img=${product.imagen})}" alt="">
+					<!-- Utiliza th:src para la URL de la imagen -->
+					<img class="card-img-top" th:src="@{/custom-images/{imageName}(imageName=${product.imagen})}" alt="imagen foto">
+
 					<div class="card-body">
 						<p class="card-text" th:text="${product.nombreProducto}"></p>
 					</div>
+
 					<div class="card-footer">
 						<a th:href="@{/productohome/{idProducto}(idProducto=${product.idProducto})}" class="btn btn-success">Ver Diseños</a>
 					</div>
@@ -53,10 +58,7 @@
 			</div>
 		</div>
 
-
-
 		<!-- /.row -->
-
 	</div>
 	<!-- /.container -->
 

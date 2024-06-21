@@ -34,8 +34,7 @@ public class Users {
     private String codigoPostal;
     //private String tipo;
     private String password;
-    private String tokenValidacion;
-    private boolean validado;
+    private String avatar;
                 //RELATIONS
     @OneToMany(mappedBy = "usuario")
     private List<Products> productos;
