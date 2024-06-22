@@ -19,7 +19,7 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id_purchase")
     private  Integer  idOrder;
 

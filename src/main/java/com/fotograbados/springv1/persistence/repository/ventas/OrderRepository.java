@@ -12,15 +12,6 @@ import java.util.List;
 @Repository
 public interface OrderRepository extends JpaRepository<OrderEntity, Long> {
     List<OrderEntity> findByUsers(Users users);
-        //Ventas por producto
-    @Query(nativeQuery = true,
-            value = "SELECT YEAR(o.fecha_venta) AS year, MONTH(o.fecha_venta) AS month, p.id_producto AS product_id, SUM(op.cantidad) AS quantity_sold " +
-                    "FROM order_entity o " +
-                    "JOIN order_product op ON o.id_purchase = op.order_id " +
-                    "JOIN products p ON op.product_id = p.id_producto " +
-                    "GROUP BY YEAR(o.fecha_venta), MONTH(o.fecha_venta), p.id_producto " +
-                    "ORDER BY year, month, product_id;")
-    List<ProductSalesPerMonthDTO> findProductSalesPerMonth();
 
             //Sales for Region
     @Query(nativeQuery = true,

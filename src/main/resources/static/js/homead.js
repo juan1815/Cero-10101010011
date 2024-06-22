@@ -20,17 +20,23 @@ toggle.onclick =function () {
     navigation.classList.toggle("active");
     main.classList.toggle("active");
 };
-  // Ventas Mensuales
-        const ventasMensuales = /*[[${ventasMensuales}]]*/ [];
+
+document.addEventListener("DOMContentLoaded", function() {
+    const chartContainer = document.getElementById('chart-container');
+
+    // Obtener datos de ventas mensuales y por producto desde Thymeleaf
+    const ventasMensuales = /*[[${ventasMensuales}]]*/ [];
+    const ventasPorProducto = /*[[${ventasPorProducto}]]*/ [];
+
+    // Verificar que los datos lleguen correctamente
+    console.log('Ventas Mensuales:', ventasMensuales);
+    console.log('Ventas por Producto:', ventasPorProducto);
+
+    // Función para crear gráfica de Ventas Mensuales
+    function renderVentasMensualesChart() {
         const labelsMensuales = ventasMensuales.map(venta => venta.mes);
         const dataMensuales = ventasMensuales.map(venta => venta.total);
 
-        // Ventas por Producto
-        const ventasPorProducto = /*[[${ventasPorProducto}]]*/ [];
-        const labelsProducto = ventasPorProducto.map(venta => venta.producto);
-        const dataProducto = ventasPorProducto.map(venta => venta.total);
-
-        // Chart.js Configuración
         const ctxMensuales = document.getElementById('ventasChart').getContext('2d');
         new Chart(ctxMensuales, {
             type: 'bar',
@@ -53,6 +59,12 @@ toggle.onclick =function () {
                 }
             }
         });
+    }
+
+    // Función para crear gráfica de Ventas por Producto
+    function renderVentasProductoChart() {
+        const labelsProducto = ventasPorProducto.map(venta => venta.producto);
+        const dataProducto = ventasPorProducto.map(venta => venta.total);
 
         const ctxProducto = document.getElementById('ventasProductoChart').getContext('2d');
         new Chart(ctxProducto, {
@@ -76,13 +88,29 @@ toggle.onclick =function () {
                 }
             }
         });
-// Función para ajustar el tamaño del gráfico cuando cambia el tamaño de la ventana
-function resizeChart() {
-    var containerWidth = chartContainer.offsetWidth;
-    myChart.canvas.parentNode.style.width = containerWidth + 'px';
-    myChart.canvas.parentNode.style.height = Math.round(containerWidth / 2) + 'px';
-}
+    }
 
-// Ajustar el tamaño del gráfico cuando se carga la página y cuando cambia el tamaño de la ventana
-window.onload = resizeChart;
-window.onresize = resizeChart;
+    // Llamar a las funciones para renderizar las gráficas
+    renderVentasMensualesChart();
+    renderVentasProductoChart();
+
+    // Función para ajustar el tamaño del gráfico cuando cambia el tamaño de la ventana
+    function resizeCharts() {
+        var containerWidth = chartContainer.offsetWidth;
+
+        // Ventas Mensuales
+        const ctxMensuales = document.getElementById('ventasChart').getContext('2d');
+        ctxMensuales.canvas.parentNode.style.width = containerWidth + 'px';
+        ctxMensuales.canvas.parentNode.style.height = Math.round(containerWidth / 2) + 'px';
+
+        // Ventas por Producto
+        const ctxProducto = document.getElementById('ventasProductoChart').getContext('2d');
+        ctxProducto.canvas.parentNode.style.width = containerWidth + 'px';
+        ctxProducto.canvas.parentNode.style.height = Math.round(containerWidth / 2) + 'px';
+    }
+
+    // Ajustar el tamaño del gráfico cuando se carga la página y cuando cambia el tamaño de la ventana
+    window.onload = resizeCharts;
+    window.onresize = resizeCharts;
+});
+

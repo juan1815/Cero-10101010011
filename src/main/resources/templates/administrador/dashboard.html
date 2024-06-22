@@ -138,6 +138,12 @@
 
     <!-- Scripts -->
     <script th:src="@{https://cdn.jsdelivr.net/npm/chart.js}"></script>
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        const ventasMensuales = /*[[${ventasMensuales}]]*/ [];
+        const ventasPorProducto = /*[[${ventasPorProducto}]]*/ [];
+        /*]]>*/
+    </script>
     <script th:src="@{/js/homead.js}"></script>
 
     <!-- ONICONS -->

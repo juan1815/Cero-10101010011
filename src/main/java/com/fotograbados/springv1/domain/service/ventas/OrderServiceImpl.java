@@ -70,7 +70,7 @@ public class OrderServiceImpl implements IOrderService{
     public List<OrderEntity> findByUsers(Users users) {
         return orderRepository.findByUsers(users);
     }
-
+    @Override
     public List<VentaMensual> obtenerVentasMensuales() {
         List<OrderEntity> orders = orderRepository.findAll();
         // Lógica para agrupar las ventas por mes y calcular el total
@@ -84,6 +84,7 @@ public class OrderServiceImpl implements IOrderService{
                 .collect(Collectors.toList());
     }
 
+    @Override
     public List<VentaProducto> obtenerVentasPorProducto() {
         List<OrderEntity> orders = orderRepository.findAll();
         // Lógica para agrupar las ventas por producto y calcular el total
