@@ -85,4 +85,17 @@ public class UsuarioController {
         session.removeAttribute("idusuario");
         return "redirect:/home";
     }
+
+    @GetMapping("/contact")
+    public String contact(){
+        return "usuario/contact";
+    }
+    @GetMapping("/services")
+    public String servicios(){
+        return "usuario/servicios";
+    }
+    @GetMapping("/somos")
+    public String somos(){
+        return "usuario/somos";
+    }
 }

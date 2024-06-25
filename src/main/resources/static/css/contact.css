@@ -1,0 +1,61 @@
+body {
+    background-image: linear-gradient(
+            150deg,
+            #3a0b5b,
+            #9377C9,
+            #D5D2FA,
+            #EAE8E6
+      );
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+h2, h3 {
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+}
+h2::after, h3::after {
+   content: "";
+   position: absolute;
+   width: 100%;
+   height: 2px;
+   background-color: black;
+   bottom: -5px;
+   left: 0;
+}
+
+.map-container {
+    margin: 20px 0;
+}
+
+p {
+    font-size: 1.1em;
+}
+
+a {
+    display: block; /* Esto hace que el enlace ocupe todo el ancho disponible */
+    text-align: center;
+    margin-top: 20px; /* Separación adicional del contenido */
+    text-decoration: none;
+    color: blue; /* Cambio de color para visibilidad */
+}
+
+a:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotograbados LTDA</title>
+    <style>
+        body {
+            background-image: linear-gradient(150deg, #3a0b5b, #9377C9, #D5D2FA, #EAE8E6);
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            padding: 10px 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        nav img {
+            height: 50px;
+            border-radius: 70%;
+
+        }
+        nav button {
+            background-color: #3a0b5b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        nav button:hover {
+            background-color: #9377C9;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2, h3 {
+            text-align: center;
+            font-weight: bold;
+            position: relative;
+        }
+        h2::after, h3::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            bottom: -5px;
+            left: 0;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            color: blue;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+    <body>
+        <nav>
+            <button onclick="window.history.back();">Regresar</button>
+            <img th:src="@{/images/Logo.jpg}" alt="Logo foto" class="logo">
+        </nav>
+        <div class="container">
+            <h2>¿Quienes somos?</h2>
+            <p>Somos la primera empresa del valle del cauca en realizar fotograbados en acero y bronce.
+                Buscamos expandirnos realizando tus diseños en nuestros materiales con tus logos,
+                placas conmemorativas, etc. Danos los incentivos para empezar nuestra mano de obra.
+            </p>
+        </div>
+        <div class="container">
+            <h3>Nuestra Historia</h3>
+            <p>La empresa nace el 15 de marzo de 2022 en Cali, Valle del Cauca,
+                fundada por una curiosa pareja llamada Daniela Guazaquillo y David Alegría.
+                Tienen como meta realizar combinaciones de la materia prima que tú, como usuario, deseas tener.
+            </p>
+        </div>
+        <div class="container">
+            <a th:href="@{https://www.datacreditoempresas.com.co/directorio/fotograbados-ltda.html}">Compruébalo</a>
+        </div>
+    </body>
+</html>

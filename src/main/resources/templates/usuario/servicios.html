@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotograbados Servicios</title>
+    <style>
+        body {
+            background-image: linear-gradient(150deg, #3a0b5b, #9377C9, #D5D2FA, #EAE8E6);
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: white;
+            padding: 10px 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        nav img {
+            height: 50px;
+            border-radius: 70%;
+
+        }
+        nav button {
+            background-color: #3a0b5b;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        nav button:hover {
+            background-color: #9377C9;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto; /* Ajuste de margen para separar mejor los bloques */
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2, h3 {
+            text-align: center;
+            font-weight: bold;
+            position: relative;
+        }
+        h2::after, h3::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            bottom: -5px;
+            left: 0;
+        }
+        a {
+            display: block; /* Esto hace que el enlace ocupe todo el ancho disponible */
+            text-align: center;
+            margin-top: 20px; /* Separación adicional del contenido */
+            text-decoration: none;
+            color: blue; /* Cambio de color para visibilidad */
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+    <nav>
+        <button onclick="window.history.back();">Regresar</button>
+        <img th:src="@{/images/Logo.jpg}" alt="Logo foto" class="logo">
+    </nav>
+    <body>
+        <div class="container">
+            <h2>Regalos</h2>
+            <p>
+                En Fotograbdos LTDA, entendemos la importancia de los detalles.
+                Por eso, ofrecemos llaveros personalizados a través de la técnica del fotograbado,
+                 ideales para regalos únicos y memorables. Cada llavero es una obra de arte,
+                 grabada con precisión para capturar sus recuerdos y mensajes especiales.
+            </p>
+        </div>
+
+        <div class="container">
+            <h3>Placas de identificación y Placas conmemorativas</h3>
+            <p>Ya sea para homenajear a un ser querido, conmemorar un evento especial o reconocer logros significativos,
+                 nuestras placas conmemorativas son la elección perfecta. Utilizamos fotograbado de alta precisión para crear
+                  placas que no solo son estéticamente agradables, sino también duraderas y resistentes al paso del tiempo.
+            </p>
+        </div>
+
+        <div class="container">
+            <h3>Logos corporativos  y pines </h3>
+            <p>Destaque su marca con elegancia y profesionalismo a través de nuestros servicios de fotograbado de logos y
+                 pines. Trabajamos estrechamente con empresas para transformar sus logotipos en piezas grabadas que pueden
+                  utilizarse en pines, insignias y otros materiales promocionales, garantizando una representación fiel y
+                   detallada de su identidad corporativa.
+            </p>
+        </div>
+
+        <div class="container">
+            <h3>Compromiso con la calidad </h3>
+            <p>En fotograbado LTDA, nuestro compromiso es con la calidad y la satisfacción del cliente. Cada
+                 proyecto que emprendemos es realizado con atención meticulosa a los detalles, utilizando materiales
+                  de la más alta calidad y técnicas avanzadas de fotograbado. Nuestro equipo de expertos se dedica a
+                   entregar resultados que superen sus expectativas, asegurando que cada producto refleje la excelencia
+                    que nos define.
+            </p>
+        </div>
+
+    </body>
+</html>
