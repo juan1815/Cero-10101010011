@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "respuesta_encuestas")
@@ -18,14 +19,15 @@ import java.time.LocalDate;
 public class AnswerSatisfactionSur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_answer", nullable = false)
+    @Column(name = "id_answer")
     private Long idAnswer;
 
-    @Column(nullable = false)
     private String respuesta;
 
-    @Column(name = "fecha_encuesta",nullable = false)
-    private LocalDate fechaEncuesta;
+    private String comentarios;
+
+    @Column(name = "fecha_encuesta")
+    private Date fechaEncuesta;
 
 
                 //RELATIONS
