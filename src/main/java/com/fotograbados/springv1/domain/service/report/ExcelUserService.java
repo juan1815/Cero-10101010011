@@ -1,7 +1,8 @@
 package com.fotograbados.springv1.domain.service.report;
 
-import com.fotograbados.springv1.domain.report.ListarOrderUserExcel;
-import com.fotograbados.springv1.persistence.entities.ventas.OrderEntity;
+
+import com.fotograbados.springv1.domain.report.ListarUsuariosExcel;
+import com.fotograbados.springv1.persistence.entities.Users;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -12,15 +13,15 @@ import java.io.IOException;
 import java.util.List;
 
 @Service
-public class ExcelOrderService {
-    public byte[] generateExcel(ListarOrderUserExcel listarOrderUserExcel) {
+public class ExcelUserService {
+    public byte[] generateExcel(ListarUsuariosExcel listarUsuariosExcel) {
         try (Workbook workbook = new XSSFWorkbook(); ByteArrayOutputStream out = new ByteArrayOutputStream()) {
-            Sheet sheet = workbook.createSheet("Reporte de Ventas");
+            Sheet sheet = workbook.createSheet("Reporte de Usuarios");
 
             // Crear y agregar el título
             Row titleRow = sheet.createRow(0);
             Cell titleCell = titleRow.createCell(0);
-            titleCell.setCellValue("Reporte de Ventas");
+            titleCell.setCellValue("Reporte de Usuarios");
             CellStyle titleStyle = workbook.createCellStyle();
             Font titleFont = workbook.createFont();
             titleFont.setBold(true);
@@ -31,7 +32,7 @@ public class ExcelOrderService {
 
             // Crear una fila para los encabezados
             Row headerRow = sheet.createRow(1);
-            String[] headers = {"ID", "Fecha Venta", "Fecha Envío", "Total"};
+            String[] headers = {"ID", "Nombre", "Email", "Teléfono"};
             CellStyle headerCellStyle = workbook.createCellStyle();
             Font headerFont = workbook.createFont();
             headerFont.setBold(true);
@@ -44,14 +45,14 @@ public class ExcelOrderService {
             }
 
             // Añadir datos de usuarios
-            List<OrderEntity> orders = listarOrderUserExcel.getOrderEntities();
+            List<Users> users = listarUsuariosExcel.getUsers();
             int rowIndex = 2;
-            for (OrderEntity order : orders) {
+            for (Users user : users) {
                 Row row = sheet.createRow(rowIndex++);
-                row.createCell(0).setCellValue(order.getIdOrder());
-                row.createCell(1).setCellValue(order.getFechaVenta().toString());
-                row.createCell(2).setCellValue(order.getFechaEnvio().toString());
-                row.createCell(3).setCellValue(order.getTotal());
+                row.createCell(0).setCellValue(user.getId());
+                row.createCell(1).setCellValue(user.getNombre());
+                row.createCell(2).setCellValue(user.getEmail());
+                row.createCell(3).setCellValue(user.getTelefono());
             }
 
             workbook.write(out);
