@@ -26,13 +26,10 @@
 
 <!-- Page Content -->
 <div class="container">
-
-
   <!-- Page Heading/Breadcrumbs -->
   <h1 class="mt-4 mb-3">
     Fotograbados LTDA <small>Stock</small>
   </h1>
-
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a th:href="@{/home}">Home</a></li>
     <li class="breadcrumb-item active">Crear Stock</li>
@@ -45,7 +42,7 @@
       <label class="control-label col-sm-2" for="cantidad">Cantidad:</label>
       <div class="col-sm-10">
         <input type="number" class="form-control" id="cantidad" name="cantidad"
-               placeholder="Ingrese la cantidad de temporada" autocomplete="off" required>
+               placeholder="Ingrese la cantidad de temporada" autocomplete="off" required min="1">
       </div>
     </div>
 
@@ -56,12 +53,19 @@
         </button>
       </div>
     </div>
-
   </form>
-
+  <script>
+    function validateForm() {
+        var cantidad = document.getElementById("cantidad").value;
+        if (cantidad <= 0) {
+            alert("La cantidad debe ser un número positivo.");
+            return false;
+        }
+        return true;
+    }
+  </script>
 </div>
 <!-- /.container -->
-
 
  <!-- Bootstrap core JavaScript -->
     <script th:src="@{/vendor/jquery/jquery.min.js}"></script>

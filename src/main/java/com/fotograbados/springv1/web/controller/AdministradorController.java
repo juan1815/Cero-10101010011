@@ -56,12 +56,6 @@ public class AdministradorController {
         model.addAttribute("ordenes", orderService.findAll());
         return "administrador/ordenes";
     }
-
-    @GetMapping("/reseñas")
-    public String reseñas(Model model){
-        model.addAttribute("opinionProducts", opinionService.findAll());
-        return "administrador/reseñas";
-    }
     @GetMapping("/info")
     public String info(){
         return "administrador/info";

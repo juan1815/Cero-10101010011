@@ -19,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -100,4 +102,36 @@ public class EncuestaSatisfaccionController {
         return "redirect:/home";
     }
 
+
+    //to admin view
+    @GetMapping("/opiniones")
+    public String mostrarOpiniones(Model model) {
+        // Obtener las respuestas de la encuesta
+        List<AnswerSatisfactionSur> opinionProducts = answerService.findAll();
+
+        // Calcular porcentaje de rating para cada opción (de 1 a 5)
+        int[] ratingsCount = new int[5]; // Contador para cada nivel de rating
+        int totalAnswers = opinionProducts.size();
+
+        for (AnswerSatisfactionSur answer : opinionProducts) {
+            if (answer.getRespuesta() != null && !answer.getRespuesta().isEmpty()) {
+                int rating = Integer.parseInt(answer.getRespuesta());
+                if (rating >= 1 && rating <= 5) {
+                    ratingsCount[rating - 1]++;
+                }
+            }
+        }
+
+        // Calcular porcentaje de respuestas para cada nivel de rating
+        double[] ratingsPercentages = new double[5];
+        for (int i = 0; i < 5; i++) {
+            ratingsPercentages[i] = (double) ratingsCount[i] / totalAnswers * 100;
+        }
+
+        // Poner los datos en el modelo para la vista
+        model.addAttribute("opinionProducts", opinionProducts);
+        model.addAttribute("ratingsPercentages", ratingsPercentages);
+
+        return "administrador/reseñas"; // Nombre de tu vista Thymeleaf
+    }
 }

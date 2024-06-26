@@ -12,5 +12,6 @@ public interface IProductService {
     public void update(Products products);
     public void delete(Long idProducto);
     public List<Products> findAll();
+    public boolean buyProducts(Long idProducto);
 
 }

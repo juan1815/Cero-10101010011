@@ -12,4 +12,5 @@ public interface IStockService {
     public void update(StockMatPri stockMatPri);
     public void delete(Long idStockMath);
     public List<StockMatPri> findAll();
+    public void addStock(Long idStockMat, int cantidad);
 }

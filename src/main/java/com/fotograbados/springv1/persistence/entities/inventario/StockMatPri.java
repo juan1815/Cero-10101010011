@@ -32,4 +32,22 @@ public class StockMatPri {
     @OneToMany(mappedBy = "stock", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Products> products;
 
+    //METHODS
+    // Método para agregar cantidad
+    public void agregarCantidad(int cantidadAAgregar) {
+        if (cantidadAAgregar <= 0) {
+            throw new IllegalArgumentException("La cantidad a agregar debe ser positiva");
+        }
+        this.cantidad += cantidadAAgregar;
+    }
+
+    // Método para descontar cantidad de uno en uno
+    public boolean descontarCantidad() {
+        if (this.cantidad < 1) {
+            return false; // No hay suficiente stock
+        }
+        this.cantidad -= 1;
+        return true;
+    }
+
 }

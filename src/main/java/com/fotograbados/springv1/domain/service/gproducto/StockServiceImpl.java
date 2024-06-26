@@ -36,4 +36,11 @@ public class StockServiceImpl implements IStockService{
     public List<StockMatPri> findAll() {
         return stockRepository.findAll();
     }
+
+    @Override
+    public void addStock(Long idStockMat, int cantidad) {
+        StockMatPri stock = stockRepository.findById(idStockMat).orElseThrow(() -> new IllegalArgumentException("Stock no encontrado"));
+        stock.agregarCantidad(cantidad);
+        stockRepository.save(stock);
+    }
 }

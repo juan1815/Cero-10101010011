@@ -63,11 +63,11 @@ public class ClienteController {
         rol.setTipo("usuario");
 
         Users users = new Users();
-        users.setNombre("pablo elvis tek");
+        users.setNombre("Pablo Elvis Tek");
         users.setUsername("Pablo");
         users.setEmail("pablo@gmail.com");
         users.setAvatar("/custom-images/fotico.jpg");
-        users.setDireccion("calle41 # 34-21");
+        users.setDireccion("Calle 41 # 34-21");
         users.setCodigoPostal("2343");
         users.setTelefono("32275581");
         users.setRolEntity(rol);
@@ -77,18 +77,28 @@ public class ClienteController {
     }
 
     @PostMapping("/saveInfo")
-    public String saveInfo(@ModelAttribute Users users,
-                           @RequestParam("img") MultipartFile file,
-                           HttpSession session) throws IOException {
+    public String saveInfo(@ModelAttribute("usuario") Users users,
+                           @RequestParam("avatar") MultipartFile file) throws IOException {
         if (!file.isEmpty()) {
             String nombreImagen = uploadFileService.saveImage(file);
-            users.setAvatar("/images/" + nombreImagen);
+            users.setAvatar("/avatar/" + nombreImagen);
         } else if (users.getId() == null) {
             users.setAvatar("/images/default.jpg");
         }
 
         usuarioService.save(users);
         return "redirect:/cliente/info";
+    }
+    @PostMapping("/cambiar-foto")
+    public String cambiarFotoPerfil(@RequestParam("avatar") MultipartFile file,
+                                    @ModelAttribute("usuario") Users usuario) throws IOException {
+        if (!file.isEmpty()) {
+            String nombreImagen = uploadFileService.saveImage(file);
+            usuario.setAvatar("/images/" + nombreImagen);
+        }
+
+        usuarioService.save(usuario);
+        return "redirect:/home";
     }
 
 }
