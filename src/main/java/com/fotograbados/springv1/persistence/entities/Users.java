@@ -5,7 +5,6 @@ import com.fotograbados.springv1.persistence.entities.agc.OpinionProduct;
 import com.fotograbados.springv1.persistence.entities.agc.QuestionSatisfactionSur;
 import com.fotograbados.springv1.persistence.entities.inventario.Category;
 import com.fotograbados.springv1.persistence.entities.inventario.Products;
-import com.fotograbados.springv1.persistence.entities.inventario.StockMatPri;
 import com.fotograbados.springv1.persistence.entities.ventas.OrderEntity;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -41,9 +40,6 @@ public class Users {
 
     @OneToMany(mappedBy = "users")
     private List<OrderEntity> orderEntities;
-
-    @OneToMany(mappedBy = "usuario")
-    private List<StockMatPri> stockMatPris;
 
     @OneToMany(mappedBy = "usuario")
     private List<Category> categories;

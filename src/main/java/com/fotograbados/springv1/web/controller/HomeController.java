@@ -45,7 +45,7 @@ public class HomeController {
         List<Products> products = productService.findAll();
         log.info("Cantidad de productos encontrados: {}", products.size());
         //Session
-        //model.addAttribute("sesion", session.getAttribute("idusuario"));
+        model.addAttribute("sesion", session.getAttribute("idusuario"));
         // Agrega logs para verificar los nombres de las imágenes
         for (Products product : products) {
             log.info("Nombre de imagen para producto {}: {}", product.getIdProducto(), product.getImagen());
@@ -83,15 +83,6 @@ public class HomeController {
             log.error("Producto con id {} no encontrado", idProducto);
             return "error/404"; // Asegúrate de tener una página de error 404
         }
-    }
-
-
-    @PostMapping("/search")
-    public String searchProduct(@RequestParam String nombre, Model model){
-        log.info("Nombre del producto: {}", nombre);
-        List<Products> products = productService.findAll().stream().filter( p -> p.getNombreProducto().contains(nombre)).collect(Collectors.toList());
-        model.addAttribute("products", products);
-        return "usuario/home";
     }
 }
 

@@ -49,8 +49,8 @@ public class ExcelOrderService {
             for (OrderEntity order : orders) {
                 Row row = sheet.createRow(rowIndex++);
                 row.createCell(0).setCellValue(order.getIdOrder());
-                row.createCell(1).setCellValue(order.getFechaVenta().toString());
-                row.createCell(2).setCellValue(order.getFechaEnvio().toString());
+                row.createCell(1).setCellValue(order.getFechaVenta());
+                row.createCell(2).setCellValue(order.getFechaEnvio());
                 row.createCell(3).setCellValue(order.getTotal());
             }
 

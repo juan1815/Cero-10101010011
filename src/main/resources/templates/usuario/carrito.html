@@ -14,106 +14,68 @@
 	<!--Font awesome -->
 	<link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-
-<body>
-
-<!-- Navigation -->
-<div th:insert="~{usuario/template_usuario.html::header}"></div>
-
-<!-- Page Content -->
-<div class="container">
-	<!-- Page Heading/Breadcrumbs -->
-	<h1 class="mt-4 mb-3">
-		Fotograbados LTDA <small>Carrito</small>
-	</h1>
-
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-		<li class="breadcrumb-item active">Carrito</li>
-	</ol>
-
-	<!-- Blog Post -->
-	<!-- Blog Post -->
-	<div class="card mb-4">
-		<div class="card-body">
-			<div class="row">
-				<div class="col-lg-9">
-					<table class="table">
-						<thead>
-						<tr>
-							<th scope="col">Producto</th>
-							<th scope="col">Precio</th>
-							<th scope="col">Cantidad</th>
-							<th scope="col">Total</th>
-							<th scope="col">Acción</th>
-						</tr>
-						</thead>
-						<tbody>
-						<!-- Iterar sobre cada item del carrito -->
-						<tr th:each="dorden : ${cart}">
-							<td th:text="${dorden.productoNombre}"></td> <!-- Asegúrate de usar productoNombre si es así como lo has definido en BillEntity -->
-							<td th:text="${dorden.costoUnidad}"></td> <!-- Precio unitario -->
-							<td th:text="${dorden.cantidad}"></td> <!-- Cantidad -->
-							<td th:text="${dorden.total}"></td> <!-- Total por item -->
-							<td>
-								<!-- Enlace para eliminar producto del carrito -->
-								<a th:href="@{/sale/delete/cart/{idProducto}(idProducto=${dorden.producto.idProducto})}" class="btn btn-danger">Quitar</a>
-								</a>
-							</td>
-						</tr>
-						</tbody>
-					</table>
-				</div>
-
-				<div class="col-lg-3">
-					<!-- Columna para mostrar subtotal y acción para ver orden -->
-					<h2 class="card-title">SUBTOTAL</h2>
-					<ul class="list-group">
-						<li class="list-group-item"><h5 th:text="${orden.total}"></h5></li> <!-- Mostrar total del pedido -->
-						<a th:href="@{/sale/order}" class="btn btn-dark">Ver Orden</a> <!-- Enlace para proceder a ver la orden completa -->
-					</ul>
+	<body>
+	<!-- Navigation -->
+	<div th:insert="~{usuario/template_usuario.html::header}" th:if="${sesion==null}"></div>
+	<div th:insert="~{usuario/template_usuario.html::header-user}" th:unless="${sesion==null}"> </div>
+	<!-- Page Content -->
+	<div class="container">
+		<!-- Page Heading/Breadcrumbs -->
+		<h1 class="mt-4 mb-3">
+			Fotograbados LTDA <small>Carrito</small>
+		</h1>
+		<ol class="breadcrumb">
+			<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+			<li class="breadcrumb-item active">Carrito</li>
+		</ol>
+		<!-- Blog Post -->
+		<div class="card mb-4">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-lg-9">
+						<table class="table">
+							<thead>
+							<tr>
+								<th scope="col">Producto</th>
+								<th scope="col">Precio</th>
+								<th scope="col">Cantidad</th>
+								<th scope="col">Total</th>
+								<th scope="col">Acción</th>
+							</tr>
+							</thead>
+							<tbody>
+							<!-- Iterar sobre cada item del carrito -->
+							<tr th:each="dorden : ${cart}">
+								<td th:text="${dorden.productoNombre}"></td> <!-- Asegúrate de usar productoNombre si es así como lo has definido en BillEntity -->
+								<td th:text="${dorden.costoUnidad}"></td> <!-- Precio unitario -->
+								<td th:text="${dorden.cantidad}"></td> <!-- Cantidad -->
+								<td th:text="${dorden.total}"></td> <!-- Total por item -->
+								<td>
+									<!-- Enlace para eliminar producto del carrito -->
+									<a th:href="@{/sale/delete/cart/{idProducto}(idProducto=${dorden.producto.idProducto})}" class="btn btn-danger">Quitar</a>
+									</a>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="col-lg-3">
+						<!-- Columna para mostrar subtotal y acción para ver orden -->
+						<h2 class="card-title">SUBTOTAL</h2>
+						<ul class="list-group">
+							<li class="list-group-item"><h5 th:text="${orden.total}"></h5></li> <!-- Mostrar total del pedido -->
+							<a th:href="@{/sale/order}" class="btn btn-dark">Ver Orden</a> <!-- Enlace para proceder a ver la orden completa -->
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
-	<!-- Feedback Section -->
-	<div class="card mb-4">
-		<div class="card-body">
-			<h1 class="mt-4 mb-3">
-				Opiniones del producto <small>👌</small>
-			</h1>
-			<table class="table">
-				<thead>
-				<tr>
-					<th>Nombre</th>
-					<th>Correo</th>
-					<th>Calificación (de 5)</th>
-					<th>Comentarios</th>
-				</tr>
-				</thead>
-				<tbody>
-				<tr th:each="opinion : ${opinionProducts}">
-					<td th:text="${opinion.user.customerName}"></td>
-					<td th:text="${opinion.user.email}"></td>
-					<td th:text="${opinion.rating + '/5'}"></td>
-					<td th:text="${opinion.comments}"></td>
-				</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-</div>
-<!-- /.container -->
-
-<!-- Footer -->
-<div th:insert="~{usuario/template_usuario.html::footer}"></div>
-
-<!-- Bootstrap core JavaScript -->
-<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
-<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-
-</body>
-
+	<!-- /.container -->
+	<!-- Footer -->
+	<div th:insert="~{usuario/template_usuario.html::footer}"></div>
+	<!-- Bootstrap core JavaScript -->
+	<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	</body>
 </html>

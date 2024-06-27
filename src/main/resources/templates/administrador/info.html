@@ -20,15 +20,15 @@
         <div class="portada-perfil">
             <div class="sombra"></div>
             <div class="avatar-perfil">
-                <img th:src="@{${usuario.avatar}}" alt="img">
-                <a type="file"  class="cambiar-foto">
-                    <form action="/cambiar-portada" method="post" enctype="multipart/form-data">
-                        <label for="imagenPortada">
-                            Cambiar foto
-                        </label>
+                <img th:src="@{${usuario.avatar}}" alt="Avatar">
+                <a href="#" class="cambiar-foto">
+                    <label for="avatar">
                         <i class="fas fa-camera"></i>
+                        Cambiar foto
+                    </label>
+                    <form th:action="@{/cliente/cambiar-foto}" method="post" enctype="multipart/form-data">
+                        <input type="file" id="avatar" name="avatar" style="display: none;" onchange="this.form.submit()">
                     </form>
-                    <!-- <span>Cambiar foto</span> -->
                 </a>
             </div>
             <div class="datos-perfil">
@@ -36,7 +36,7 @@
                 <p class="bio-usuario" th:text="${usuario.rolEntity.tipo}"></p>
             </div>
             <div class="opcciones-perfil">
-                <form action="/cambiar-portada" method="post" enctype="multipart/form-data">
+                <form th:action="@{/cambiar-portada}" method="post" enctype="multipart/form-data">
                     <input type="file" id="imagenPortada" name="imagenPortada" style="display: none;" onchange="this.form.submit()">
                     <label for="imagenPortada" class="btn btn-primary">
                         Cambiar portada

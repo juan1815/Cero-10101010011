@@ -31,13 +31,15 @@ public class AnswerSatisfactionSur {
 
 
                 //RELATIONS
-    @OneToOne(fetch = FetchType.LAZY)
-    private QuestionSatisfactionSur questionSSurs;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "questionSSurs", referencedColumnName = "id_pregunta")
+    private QuestionSatisfactionSur question;
 
     @OneToOne(fetch = FetchType.LAZY)
     private OpinionProduct opinionProduct;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id")
     private Users usuario;
 
 }

@@ -10,36 +10,12 @@
 <meta name="author" content="JuanGuazaquillo">
 
 <title>Fotograbados LTDA</title>
-
-
-
     <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet}">
 	<link th:href="@{/css/heroic-features.css}" rel="stylesheet} ">
-
 </head>
 
 <body>
-
-<!-- Navigation -->
-<!--<div th:fragment="header">
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<div class="container">
-			<a class="navbar-brand" th:href="@{/}">Fotograbados LTDA</a>
-
-			<img src="/images/LogoDefine.jpg" th:src="@{/images/LogoDefine.jpg}" alt="Imagen de un xd">
-
-
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" th:href="@{/sale/getCart}">Carrito</a></li>
-					<li class="nav-item"><a class="nav-link" th:href="@{/usuario/login}">Login</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
-</div> -->
-
 
 <!-- Navigation -->
 <div th:fragment="header">
@@ -48,20 +24,30 @@
 			<a class="navbar-brand" th:href="@{/home}">Fotograbados LTDA</a>
             <img th:src="@{/images/Logo.jpg}" alt="Logo" class="avatar">
 
-			<!--	<form class="form-inline my-2 my-lg-0" method="post" th:action="@{/search}">
-                    <input class="form-control mr-sm-2" type="search"
-                           placeholder="Buscar" aria-label="Search" name="nombre"
-                           autocomplete="off">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-                </form>
-                -->
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item"><a class="nav-link" th:href="@{/sale/getCart}">Carrito</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/usuario/login}">Login</a></li>
+				</ul>
+			</div>
 
+		</div>
+	</nav>
+</div>
+
+<!-- Navigation -->
+<div th:fragment="header-user">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<div class="container">
+			<a class="navbar-brand" th:href="@{/home}">Fotograbados LTDA</a>
+            <img th:src="@{/images/Logo.jpg}" alt="Logo" class="avatar">
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarResponsiveUser" aria-controls="navbarResponsiveUser"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="collapse navbar-collapse" id="navbarResponsiveUser">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown"><a
@@ -83,8 +69,6 @@
         </nav>
     </div>
 
-
-
         <!-- Footer -->
 	<div th:fragment="footer">
 		<footer class="py-5 bg-dark">
@@ -104,7 +88,6 @@
             </div>
 		</footer>
 	</div>
-
 	<!-- Bootstrap core JavaScript -->
 	<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
 	<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>

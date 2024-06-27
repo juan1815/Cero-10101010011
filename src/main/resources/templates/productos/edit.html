@@ -63,9 +63,9 @@
         <div class="form-group">
           <label class="control-label col-sm-2" for="idCategoria">Categoria:</label>
           <div class="col-sm-10">
-            <select v>
+            <select class="form-control" id="idCategoria" name="category.idCategoria">
               <option value="">Seleccione una Categoria</option>
-              <option th:each="category : ${category}" th:value="${category.tipoCategoria}">
+              <option th:each="category : ${categories}" th:value="${category.idCategoria}">
                 <span th:text="${category.tipoCategoria}"></span>
               </option>
             </select>
@@ -73,14 +73,9 @@
         </div>
 
         <div class="form-group">
-          <label class="control-label col-sm-2" for="idStockMat">Cantidad:</label>
+          <label class="control-label col-sm-2" for="cantidad">Cantidad:</label>
           <div class="col-sm-10">
-            <select class="form-control" id="idStockMat" name="idStockMat">
-              <option value="">Seleccione una cantidad</option>
-              <option th:each="stock : ${stocks}" th:value="${stock.cantidad}">
-                <span th:text="${stock.cantidad}"></span>
-              </option>
-            </select>
+            <input type="number" class="form-control" step="any"  id="cantidad" name="cantidad" placeholder="Ingrese el precio del producto" th:value="${products.cantidad}" required autocomplete="off">
           </div>
         </div>
 

@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "pregunta_encuesta")
@@ -27,8 +28,8 @@ public class QuestionSatisfactionSur {
     private Date fechaPregunta;
 
             //RELATIONS
-    @OneToOne(mappedBy = "questionSSurs")
-    private AnswerSatisfactionSur answerSatisfactionSur;
+    @OneToMany(mappedBy = "question")
+    private List<AnswerSatisfactionSur> answers;
     @ManyToOne
     private Users usuario;
 }

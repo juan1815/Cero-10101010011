@@ -12,10 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -91,15 +88,36 @@ public class EncuestaSatisfaccionController {
         return "encuesta/answercli";
     }
     @PostMapping("/answer")
-    public String answerEncuesta(AnswerSatisfactionSur satisfactionSur, HttpSession session){
-        LOGGER.info("Este es el ojeto producto {}", satisfactionSur);
-            satisfactionSur.setFechaEncuesta(new Date());
+    public String answerEncuesta(@RequestParam Map<String, String> params, HttpSession session) {
+        LOGGER.info("Respuestas de la encuesta: {}", params);
 
-//        Users u = usuarioService.findById(Long .parseLong(session.getAttribute("idUsuario").toString())).get();
-//        satisfactionSur.setUsuario(u);
+        Date fechaEncuesta = new Date();
 
-        answerService.save(satisfactionSur);
-        return "redirect:/home";
+        // Obtener el usuario actual desde la sesión
+        //Long userId = Long.parseLong(session.getAttribute("idUsuario").toString());
+        //Users u = usuarioService.findById(userId).orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        // Recorrer todas las respuestas y guardarlas individualmente
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+
+            if (key.startsWith("question_")) {
+                Long questionId = Long.parseLong(key.substring("question_".length()));
+                Integer respuesta = Integer.parseInt(value);
+
+                // Crear una nueva respuesta
+                AnswerSatisfactionSur satisfactionSur = new AnswerSatisfactionSur();
+                satisfactionSur.setFechaEncuesta(fechaEncuesta);
+                satisfactionSur.setRespuesta(String.valueOf(respuesta));
+                satisfactionSur.setQuestion(questionService.get(questionId).orElse(null));
+                //satisfactionSur.setUsuario(u);
+
+                answerService.save(satisfactionSur);
+            }
+        }
+
+        return "redirect:/home"; // Asegúrate de que esta ruta sea válida en tu aplicación
     }
 
 
@@ -125,7 +143,7 @@ public class EncuestaSatisfaccionController {
         // Calcular porcentaje de respuestas para cada nivel de rating
         double[] ratingsPercentages = new double[5];
         for (int i = 0; i < 5; i++) {
-            ratingsPercentages[i] = (double) ratingsCount[i] / totalAnswers * 100;
+            ratingsPercentages[i] = totalAnswers > 0 ? ((double) ratingsCount[i] / totalAnswers * 100) : 0;
         }
 
         // Poner los datos en el modelo para la vista

@@ -15,7 +15,9 @@
     </head>
     <body>
     <!-- Navigation -->
-    <div th:insert="~{usuario/template_usuario.html::header}"></div>
+    <div th:insert="~{usuario/template_usuario.html::header}" th:if="${sesion==null}"></div>
+    <div th:insert="~{usuario/template_usuario.html::header-user}" th:unless="${sesion==null}"> </div>
+
     <section class="perfil-usuario">
         <div class="contenedor-perfil" id="mostrador">
             <div class="portada-perfil">

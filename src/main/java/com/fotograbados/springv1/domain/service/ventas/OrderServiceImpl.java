@@ -1,5 +1,6 @@
 package com.fotograbados.springv1.domain.service.ventas;
 
+import com.fotograbados.springv1.domain.dto.ChartData;
 import com.fotograbados.springv1.domain.dto.VentaMensual;
 import com.fotograbados.springv1.domain.dto.VentaProducto;
 import com.fotograbados.springv1.persistence.entities.Users;
@@ -8,6 +9,7 @@ import com.fotograbados.springv1.persistence.repository.ventas.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.DateFormatSymbols;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -94,5 +96,40 @@ public class OrderServiceImpl implements IOrderService{
                 .entrySet().stream()
                 .map(entry -> new VentaProducto(entry.getKey(), entry.getValue()))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Long count() {
+        return orderRepository.count();
+    }
+
+    @Override
+    public List<ChartData> getSalesDataByMonth() {
+        List<Object[]> salesData = orderRepository.countSalesByMonth();
+        List<ChartData> chartDataList = new ArrayList<>();
+
+        // Obtener el nombre del mes usando DateFormatSymbols
+        DateFormatSymbols dfs = new DateFormatSymbols();
+        String[] months = dfs.getMonths();
+
+        // Inicializar un array para contar las ventas por mes
+        int[] monthlySales = new int[12];
+
+        // Recorrer los resultados obtenidos y contar las ventas por mes
+        for (Object[] data : salesData) {
+            int monthIndex = (int) data[0]; // Renombrar la variable a monthIndex
+            int salesCount = ((Number) data[1]).intValue();
+
+            // Sumar las ventas al mes correspondiente (los meses en Java van de 0 a 11)
+            monthlySales[monthIndex - 1] += salesCount;
+        }
+        // Crear objetos ChartData para cada mes con el nombre del mes y la cantidad de ventas
+        for (int i = 0; i < 12; i++) {
+            ChartData chartData = new ChartData();
+            chartData.setMonth(months[i]);
+            chartData.setSalesCount(monthlySales[i]);
+            chartDataList.add(chartData);
+        }
+        return chartDataList;
     }
 }

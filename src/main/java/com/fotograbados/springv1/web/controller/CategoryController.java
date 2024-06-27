@@ -2,6 +2,7 @@ package com.fotograbados.springv1.web.controller;
 
 import com.fotograbados.springv1.domain.service.IUsuarioService;
 import com.fotograbados.springv1.domain.service.gproducto.ICategoryService;
+import com.fotograbados.springv1.persistence.entities.Users;
 import com.fotograbados.springv1.persistence.entities.inventario.Category;
 import com.fotograbados.springv1.web.server.NotFoundException;
 import jakarta.servlet.http.HttpSession;
@@ -39,9 +40,10 @@ public class CategoryController {
             {
         LOGGER.info("Este es el objeto producto {}", category);
 
+
         // to save the product with an actor on the Proyect of Software
-//        Users u = usuarioService.findById(Long.parseLong(session.getAttribute("idUsuario").toString())).get();
-//        category.setUsuario(u);
+        Users users = usuarioService.findById(Long.parseLong(session.getAttribute("idUsuario").toString())).get();
+        category.setUsuario(users);
 
         categoryService.save(category);
         return "redirect:/category/showcat";

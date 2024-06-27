@@ -2,6 +2,7 @@ package com.fotograbados.springv1.web.controller;
 
 import com.fotograbados.springv1.domain.service.IUsuarioService;
 //    import com.fotograbados.springv1.persistence.entities.RolEntity;
+import com.fotograbados.springv1.persistence.entities.RolEntity;
 import com.fotograbados.springv1.persistence.entities.Users;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
@@ -12,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/usuario")
 public class UsuarioController {
@@ -19,6 +22,7 @@ public class UsuarioController {
 
     @Autowired
     private IUsuarioService usuarioService;
+
 
 
 
@@ -36,7 +40,6 @@ public class UsuarioController {
     @PostMapping("/save")
     public String save(Users usuario) {
         logger.info("Usuario registro: {}", usuario);
-
       //  usuario.setPassword(passEncode.encode(usuario.getPassword()));
         usuarioService.save(usuario);
 
@@ -49,13 +52,35 @@ public class UsuarioController {
     }
 
 
-//    @GetMapping("/acceder")
-//    public String acceder(Users users, HttpSession session) {
-//        logger.info("Accesos : {}", users);
-//
-//         //Buscar el usuario por email
-//        Optional<Users> userOptional = usuarioService.findByEmail(users.getEmail());
-//
+    @PostMapping("/acceder")
+    public String acceder(Users users, HttpSession session) {
+        logger.info("Accesos : {}", users.getEmail());
+
+        // Buscar el usuario por email
+        Optional<Users> user = usuarioService.findByEmail(users.getEmail());
+        logger.info("Usuario encontrado: {}", user.isPresent());
+        logger.info("usuario db: {}", user.orElse(null));
+
+        if (user.isPresent()) {
+            Users userFromDb = user.get();
+            session.setAttribute("idUsuario", userFromDb.getId());
+
+            String userType = userFromDb.getRolEntity().getTipo();
+            logger.info("Tipo de usuario: {}", userType);
+
+            if ("ADMIN".equals(userType)) {
+                logger.info("Redireccionando a /administrador");
+                return "redirect:/administrador";
+            } else if ("USER".equals(userType)) {
+                logger.info("Redireccionando a /home");
+                return "redirect:/home";
+            } else {
+                logger.info("Redireccionando a /home por defecto");
+                return "redirect:/home";
+            }
+        } else {
+            logger.info("Usuario no existe");
+        }
 //        if (userOptional.isPresent()) {
 //            Users user = userOptional.get();
 //            if (passEncode.matches(users.getPassword(), user.getPassword())) {
@@ -75,9 +100,8 @@ public class UsuarioController {
 //        } else {
 //            logger.info("Usuario no existe");
 //        }
-//
-//        return "redirect:/login";
-//    }
+        return "redirect:/home";
+    }
 
     //CLOSE SESSION
     @GetMapping("/cerrar")
@@ -98,4 +122,6 @@ public class UsuarioController {
     public String somos(){
         return "usuario/somos";
     }
+    @GetMapping("recuContra")
+    public String recuContra() { return "usuario/recuContra";}
 }

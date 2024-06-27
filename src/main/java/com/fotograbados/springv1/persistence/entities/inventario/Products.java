@@ -18,36 +18,19 @@ public class Products {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_producto")
     private Long idProducto;
-
-    @Column(name = "nombre_producto") //nullable = false
+    @Column(name = "nombre_producto")
     private String nombreProducto;
-
-    //@Column(nullable = false)
     private String descripcion;
-
-   // @Column(nullable = false)
     private String imagen;
-
-    //@Column(nullable = false)
     private double precio;
-
-    //@Column(nullable = false)
     private Integer cantidad;
-
-
                                             //RELATIONS
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_stockMat", referencedColumnName = "id_stockMat")
-    private StockMatPri stock;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categoria", referencedColumnName = "id_categoria")
     private Category category;
-
     @OneToOne(mappedBy = "products")
     private DetailProduct detailProducts;
-
     @ManyToOne
     private Users usuario;
 

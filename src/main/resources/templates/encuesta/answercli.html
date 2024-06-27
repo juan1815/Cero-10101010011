@@ -11,7 +11,7 @@
     <!-- Custom styles for this template -->
     <link th:href="@{/css/heroic-features.css}" rel="stylesheet">
     <link th:href="@{/css/answercli.css}" rel="stylesheet">
-    <!--Font awesome -->
+    <!-- Font awesome -->
     <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css}" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
@@ -29,28 +29,28 @@
             <li class="breadcrumb-item active">Calificar experiencia</li>
         </ol>
         <h2>Califica de 1 a 5
-        <small>Donde 1 es pesimo, 3 es regular y 5 es excelente</small>
+            <small>Donde 1 es pésimo, 3 es regular y 5 es excelente</small>
         </h2>
 
-            <div class="question-container">
-                <form th:action="@{/encuestaSatisfaccion/answer}" method="post" class="table">
+        <div class="question-container">
+            <form th:action="@{/encuestaSatisfaccion/answer}" method="post" class="table">
                 <div class="form-group">
-                        <div th:each="question : ${questions}">
-                            <label  class="control-label col-sm-15" th:for="${'question' + question.idPregunta}" th:text="${question.pregunta}"></label>
-                            <div class="col-sm-40">
-                                    <select id="respuesta" name="respuesta">
-                                        <option value="">Seleccionar respuesta</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                        <option value="4">4</option>
-                                        <option value="5">5</option>
-                                    </select>
-                            </div>
+                    <div th:each="question : ${questions}">
+                        <label class="control-label col-sm-15" th:for="${'question' + question.idPregunta}" th:text="${question.pregunta}"></label>
+                        <div class="col-sm-40">
+                            <select th:id="${'respuesta' + question.idPregunta}" th:name="${'question_' + question.idPregunta}">
+                                <option value="">Seleccionar respuesta</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
                         </div>
                     </div>
-                    <label for="comentarios">Comentarios adicionales:</label>
-                    <textarea id="comentarios" name="comentarios"></textarea>
+                </div>
+                <label for="comentarios">Comentarios adicionales:</label>
+                <textarea id="comentarios" name="comentarios"></textarea>
 
                 <!-- Botón de envío -->
                 <button class="send-button" type="submit">Enviar</button>

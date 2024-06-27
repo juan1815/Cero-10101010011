@@ -3,7 +3,6 @@ package com.fotograbados.springv1.web.controller;
 import com.fotograbados.springv1.domain.service.IUsuarioService;
 import com.fotograbados.springv1.domain.service.agc.IOpinionService;
 import com.fotograbados.springv1.domain.service.gproducto.IProductService;
-import com.fotograbados.springv1.domain.service.gproducto.IStockService;
 import com.fotograbados.springv1.domain.service.ventas.IBillService;
 import com.fotograbados.springv1.domain.service.ventas.IOrderService;
 import com.fotograbados.springv1.persistence.entities.Users;
@@ -19,7 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -46,8 +44,6 @@ public class SaleController {
     @Autowired
     private IOpinionService opinionService;
 
-    @Autowired
-    private IStockService stockService;
 
     private OrderEntity order = new OrderEntity();
     private List<BillEntity> detalles = new ArrayList<>();
@@ -105,6 +101,7 @@ public class SaleController {
         // Agrega los detalles del carrito
         model.addAttribute("cart", detalles);
         model.addAttribute("orden", order);
+        //Session
         model.addAttribute("sesion", session.getAttribute("idusuario"));
 
         // Agrega las opiniones de productos con información de usuarios
@@ -118,6 +115,7 @@ public class SaleController {
     @GetMapping("/order")
     public String order(Model model, HttpSession session) {
 
+        Users users = usuarioService.findById( Long.parseLong(session.getAttribute("idUsuario").toString())).get();
 //        Object idUsuarioObj = session.getAttribute("idusuario");
 //        if (idUsuarioObj == null) {
 //            log.error("idusuario no presente en la sesión");
@@ -131,7 +129,7 @@ public class SaleController {
 //            return "error"; // O redirige a una página de error adecuada
 //        }
 
-        Users users = new Users();
+//        Users users = new Users();
 //        Users users = optionalUser.get();
         model.addAttribute("cart", detalles);
         model.addAttribute("orden", order);
@@ -146,20 +144,22 @@ public class SaleController {
         order.setFechaVenta(fechaVenta);
         order.setNumero(orderService.generarNumeroOrden());
 
-        Object idUsuarioObj = session.getAttribute("idusuario");
-        if (idUsuarioObj == null) {
-            log.error("idusuario no presente en la sesión");
-            return "redirect:/usuario/log-in";
-        }
+        //Usuario
+        Users users = usuarioService.findById( Long.parseLong(session.getAttribute("idUsuario").toString()) ).get();
+//        Object idUsuarioObj = session.getAttribute("idusuario");
+//        if (idUsuarioObj == null) {
+//            log.error("idusuario no presente en la sesión");
+//            return "redirect:/usuario/log-in";
+//        }
 
-        Long idUsuario = Long.parseLong(idUsuarioObj.toString());
-        Optional<Users> optionalUser = usuarioService.findById(idUsuario);
-        if (!optionalUser.isPresent()) {
-            log.error("Usuario no encontrado con id: {}", idUsuario);
-            return "error"; // O redirige a una página de error adecuada
-        }
+//        Long idUsuario = Long.parseLong(idUsuarioObj.toString());
+//        Optional<Users> optionalUser = usuarioService.findById(idUsuario);
+//        if (!optionalUser.isPresent()) {
+//            log.error("Usuario no encontrado con id: {}", idUsuario);
+//            return "error"; // O redirige a una página de error adecuada
+//        }
 
-        Users users = optionalUser.get();
+//        Users users = optionalUser.get();
         order.setUsers(users);
         orderService.save(order);
 

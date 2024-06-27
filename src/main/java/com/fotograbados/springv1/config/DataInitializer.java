@@ -21,12 +21,6 @@ public class DataInitializer implements CommandLineRunner {
             userRole.setDescripcion("Rol de usuario estándar");
             rolRepository.save(userRole);
         }
-        if (rolRepository.findByTipo("OPERADOR") == null) {
-            RolEntity operadorRole = new RolEntity();
-            operadorRole.setTipo("OPERADOR");
-            operadorRole.setDescripcion("Rol de operador");
-            rolRepository.save(operadorRole);
-        }
         if (rolRepository.findByTipo("ADMIN") == null) {
             RolEntity adminRole = new RolEntity();
             adminRole.setTipo("ADMIN");

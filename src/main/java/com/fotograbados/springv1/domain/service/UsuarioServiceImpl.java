@@ -14,8 +14,8 @@ import java.nio.file.attribute.UserPrincipalNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
-	@Service
-	public class UsuarioServiceImpl implements IUsuarioService {
+@Service
+public class UsuarioServiceImpl implements IUsuarioService {
 		@Autowired
 		private UsuarioRepository usuarioRepository;
 		@Autowired
@@ -35,13 +35,15 @@ import java.util.Optional;
 	@Override
 	@Transactional
 	public Users save(Users user) {
-		// Buscar el rol "USER" en la base de datos
-		RolEntity rol = rolRepository.findByTipo("USER");
-		if (rol == null) {
-			throw new RuntimeException("Rol 'USER' no encontrado en la base de datos");
-		}
+		// Asignar el ID del rol "USER"
+		Long userRoleId = 1L;
 
-		// Asigna el rol al usuario
+		// Buscar el rol "USER" en la base de datos por ID
+		RolEntity rol = rolRepository.findById(userRoleId).orElseThrow(() ->
+				new RuntimeException("Rol 'USER' no encontrado en la base de datos")
+		);
+
+		// Asignar el rol al usuario
 		user.setRolEntity(rol);
 
 		// Guardar el usuario con el rol asignado
@@ -63,6 +65,6 @@ import java.util.Optional;
 
 	@Override
 	public Optional<Users> findByEmail(String email) {
-		return Optional.empty();
+		return usuarioRepository.findByEmail(email);
 	}
 }
