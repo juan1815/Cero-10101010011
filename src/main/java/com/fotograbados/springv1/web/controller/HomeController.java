@@ -72,9 +72,11 @@ public class HomeController {
 
     @GetMapping("productohome/{idProducto}")
     public String productoHome(@PathVariable("idProducto") Long idProducto, Model model) {
+        List<Products> productss = productService.findAll();
+        model.addAttribute("productss", productss);
+
         log.info("Id producto enviado como parametro {}", idProducto);
         Optional<Products> productsOptional = productService.get(idProducto);
-
         if (productsOptional.isPresent()) {
             Products products = productsOptional.get();
             model.addAttribute("products", products);

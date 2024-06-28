@@ -26,6 +26,7 @@ public class Products {
     private Integer cantidad;
                                             //RELATIONS
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_categoria", referencedColumnName = "id_categoria")
     private Category category;

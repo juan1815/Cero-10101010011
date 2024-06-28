@@ -139,40 +139,46 @@ public class SaleController {
     }
 
     @GetMapping("/saveOrder")
-    public String saveOrder(HttpSession session) {
-        Date fechaVenta = new Date();
-        order.setFechaVenta(fechaVenta);
-        order.setNumero(orderService.generarNumeroOrden());
+    public String saveOrder(HttpSession session) throws Exception {
+        try {
+            Date fechaCreacion = new Date();
+            order.setFechaVenta(fechaCreacion);
+            order.setNumero(orderService.generarNumeroOrden());
 
-        //Usuario
-        Users users = usuarioService.findById( Long.parseLong(session.getAttribute("idUsuario").toString()) ).get();
-//        Object idUsuarioObj = session.getAttribute("idusuario");
-//        if (idUsuarioObj == null) {
-//            log.error("idusuario no presente en la sesión");
-//            return "redirect:/usuario/log-in";
-//        }
+            Users users = usuarioService.findById(Long.parseLong(session.getAttribute("idUsuario").toString())).orElseThrow(() -> new Exception("Usuario no encontrado"));
+            order.setUsers(users);
 
-//        Long idUsuario = Long.parseLong(idUsuarioObj.toString());
-//        Optional<Users> optionalUser = usuarioService.findById(idUsuario);
-//        if (!optionalUser.isPresent()) {
-//            log.error("Usuario no encontrado con id: {}", idUsuario);
-//            return "error"; // O redirige a una página de error adecuada
-//        }
+            // Guardar la orden
+            OrderEntity savedOrder = orderService.save(order);
 
-//        Users users = optionalUser.get();
-        order.setUsers(users);
-        orderService.save(order);
+            // Procesar y guardar los detalles de la orden (facturas)
+            for (BillEntity dt : detalles) {
+                dt.setOrder(savedOrder); // Asociar la factura con la orden guardada
+                Products product = dt.getProducto();
+                int cantidadSolicitada = dt.getCantidad();
 
-        // Guardar detalles
-        for (BillEntity dt : detalles) {
-            dt.setOrder(order);
-            billService.save(dt);
+                // Actualizar la cantidad disponible del producto
+                int nuevaCantidad = product.getCantidad() - cantidadSolicitada;
+                if (nuevaCantidad < 0) {
+                    throw new Exception("No hay suficientes productos disponibles para la factura: " + dt.getIdfactura());
+                }
+                product.setCantidad(nuevaCantidad);
+                productService.save(product); // Guardar el producto actualizado
+
+                // Guardar la factura
+                billService.save(dt);
+            }
+
+            // Limpiar lista y orden
+            order = new OrderEntity();
+            detalles.clear();
+
+            return "redirect:/home";
+        } catch (Exception e) {
+            // Manejar la excepción apropiadamente
+            e.printStackTrace(); // O bien, registra el error de alguna manera
+            throw new Exception("Error al procesar la orden: " + e.getMessage());
         }
-
-        // Limpiar lista y orden
-        order = new OrderEntity();
-        detalles.clear();
-
-        return "redirect:/";
     }
+
 }

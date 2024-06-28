@@ -36,19 +36,4 @@ public class ProductServiceImpl implements IProductService {
     public List<Products> findAll() {
         return productsRepository.findAll();
     }
-
-//    @Override
-//    public boolean buyProducts(Long idProducto) {
-//        Products product = productsRepository.findById(idProducto).orElseThrow(() -> new IllegalArgumentException("Producto no encontrado"));
-//        StockMatPri stock = product.getStock();
-//
-//        if (stock.descontarCantidad()) {
-//            stockRepository.save(stock);
-//            return true;
-//        } else {
-//            return false; // No hay suficiente stock
-//        }
-//    }
-
-
 }

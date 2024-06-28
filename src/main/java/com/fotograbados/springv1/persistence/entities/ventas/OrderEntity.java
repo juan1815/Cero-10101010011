@@ -1,6 +1,7 @@
 package com.fotograbados.springv1.persistence.entities.ventas;
 
 import com.fotograbados.springv1.persistence.entities.Users;
+import com.fotograbados.springv1.persistence.entities.inventario.Products;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -8,6 +9,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -22,24 +24,20 @@ public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "id_purchase")
     private  Integer  idOrder;
-
     private String numero;
-
     @Column(name = "fecha_venta")
     private Date fechaVenta;
-
     @Column(name = "fecha_envio")
     private Date fechaEnvio;
-
     private Double descuento;
-
     private String estado;
-
     private double total;
-
                     //RELATIONS
+    @ManyToOne
+    private Products products;
+
     @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
-    private List<BillEntity> bill;
+    private List<BillEntity> bill = new ArrayList<>(); ;
 
     @ManyToOne
     @JoinColumn(name = "idCampañas", referencedColumnName = "id_campañas", insertable = false, updatable = false)

@@ -4,10 +4,14 @@ import com.fotograbados.springv1.domain.dto.ChartData;
 import com.fotograbados.springv1.domain.dto.VentaMensual;
 import com.fotograbados.springv1.domain.dto.VentaProducto;
 import com.fotograbados.springv1.persistence.entities.Users;
+import com.fotograbados.springv1.persistence.entities.inventario.Products;
+import com.fotograbados.springv1.persistence.entities.ventas.BillEntity;
 import com.fotograbados.springv1.persistence.entities.ventas.OrderEntity;
+import com.fotograbados.springv1.persistence.repository.gproducto.ProductsRepository;
 import com.fotograbados.springv1.persistence.repository.ventas.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.text.DateFormatSymbols;
 import java.time.ZoneId;
@@ -21,6 +25,8 @@ import java.util.stream.Collectors;
 public class OrderServiceImpl implements IOrderService{
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
+    private ProductsRepository productsRepository;
 
     @Override
     public List<OrderEntity> findAll() {
@@ -33,8 +39,27 @@ public class OrderServiceImpl implements IOrderService{
     }
 
     @Override
-    public OrderEntity save(OrderEntity order) {
-        return orderRepository.save(order);
+    @Transactional(rollbackFor = Exception.class) // Manejo de transacciones y rollback en caso de excepción
+    public OrderEntity save(OrderEntity order) throws Exception {
+        try {
+            // Obtener la cantidad solicitada de productos en la factura
+            List<BillEntity> bills = order.getBill();
+            for (BillEntity bill : bills) {
+                Products product = bill.getProducto();
+                int cantidadSolicitada = bill.getCantidad();
+                // Disminuir la cantidad disponible del producto
+                int nuevaCantidad = product.getCantidad() - cantidadSolicitada;
+                if (nuevaCantidad < 0) {
+                    throw new Exception("No hay suficientes productos disponibles");
+                }
+                product.setCantidad(nuevaCantidad);
+                productsRepository.save(product); // Guardar el producto actualizado
+            }
+            // Guardar la orden actualizada
+            return orderRepository.save(order);
+        } catch (Exception e) {
+            throw new Exception("Error al procesar la orden: " + e.getMessage());
+        }
     }
 
     @Override

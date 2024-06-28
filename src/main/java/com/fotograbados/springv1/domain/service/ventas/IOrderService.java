@@ -14,7 +14,7 @@ import java.util.Optional;
 public interface IOrderService {
     List<OrderEntity> findAll();
     Optional<OrderEntity> findById(Long idOrder);
-    OrderEntity save(OrderEntity order);
+    OrderEntity save(OrderEntity order) throws Exception;
     String generarNumeroOrden();
     List<OrderEntity> findByUsers(Users users);
     List<VentaMensual> obtenerVentasMensuales();

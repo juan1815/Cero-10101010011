@@ -27,14 +27,14 @@ public class BillEntity {
     @Column(nullable = false)
     private double total;
                 //RELATIONS
-   @ManyToOne
+    @ManyToOne
+    private Products producto;
+
+    @ManyToOne
    @JoinColumn(name = "id_order", referencedColumnName = "id_purchase", insertable = false, updatable = false)
    private OrderEntity order;
 
     @OneToOne(mappedBy = "bill")
     private PaymentMethodEntity paymentMethodEntities;
-
-    @ManyToOne
-    private Products producto;
 
 }
