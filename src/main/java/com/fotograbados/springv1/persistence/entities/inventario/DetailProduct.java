@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "detalle_producto")
+@Table(name = "detail_product")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -15,23 +15,15 @@ import lombok.Setter;
 public class DetailProduct {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_detalle", nullable = false)
-    private Long idDetalle;
-    @Column(name = "descripcion_producto",nullable = false)
-    private String descripcionProducto;
-    @Column(nullable = false)
-    private String dimenciones;
-    @Column(nullable = false)
-    private String materiales;
-    @Column(name = "imagen_detalles", nullable = false)
-    private String detallesImagen;
-    @Column(name = "nombre_user", nullable = false)
-    private String nombreUser;
-    @Column(name = "identifacion_user")
-    private Integer identifacionUser;
-
+    @Column(name = "id_detail", nullable = false)
+    private Long idDetail;
+    @Column(name = "date_fabrication",nullable = false)
+    private String dataFabrication;
                 //RELATIONS
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_producto", referencedColumnName = "id_producto", insertable = false, updatable = false)
+    @JoinColumn(name = "id_inventory_fk", referencedColumnName = "id_product", insertable = false, updatable = false)
     private Products products;
+
+    @OneToOne(mappedBy = "detailPro")
+    private DetailProduct inventory;
 }
