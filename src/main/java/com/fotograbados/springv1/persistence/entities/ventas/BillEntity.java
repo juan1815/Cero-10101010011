@@ -1,6 +1,7 @@
 package com.fotograbados.springv1.persistence.entities.ventas;
 
-import com.fotograbados.springv1.persistence.entities.inventario.Products;
+import java.util.Date;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,24 +18,14 @@ public class BillEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_factura", nullable = false)
-    private Long idfactura;
-    @Column(name = "producto_nombre", nullable = false)
-    private String productoNombre;
-    @Column(nullable = false)
-    private Integer cantidad;
-    @Column(name = "costo_unidad")
-    private double costoUnidad;
-    @Column(nullable = false)
-    private double total;
-                //RELATIONS
-    @ManyToOne
-    private Products producto;
-
-    @ManyToOne
-   @JoinColumn(name = "id_order", referencedColumnName = "id_purchase", insertable = false, updatable = false)
-   private OrderEntity order;
-
-    @OneToOne(mappedBy = "bill")
-    private PaymentMethodEntity paymentMethodEntities;
-
+    private Long id_factura;
+    @Column(name = "fecha_emision", nullable = false)
+    private Date fecha_emision;
+    @Column(name = "metodo_pago", nullable = true)
+    private String metodo_pago;
+    @Column(name = "valor_total", nullable = true)
+    private Double valor_total;
+    
+    // @Column(nullable = false)
+    // private double total;
 }

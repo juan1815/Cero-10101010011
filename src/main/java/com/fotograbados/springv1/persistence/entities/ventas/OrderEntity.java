@@ -1,7 +1,6 @@
 package com.fotograbados.springv1.persistence.entities.ventas;
 
 import com.fotograbados.springv1.persistence.entities.Users;
-import com.fotograbados.springv1.persistence.entities.inventario.Products;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,33 +21,32 @@ import java.util.List;
 public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "id_purchase")
-    private  Integer  idOrder;
-    private String numero;
-    @Column(name = "fecha_venta")
-    private Date fechaVenta;
-    @Column(name = "fecha_envio")
-    private Date fechaEnvio;
-    private Double descuento;
-    private String estado;
-    private double total;
+    @Column (name = "id_pedido", nullable = false)
+    private Integer id_pedido;
+    @Column(name = "fecha_venta", nullable = false)
+    private Date fecha_venta;
+    @Column(name = "fecha_envio", nullable = false)
+    private Date fecha_envio;
+    @Column(name = "cantidad", nullable = false)
+    private int cantidad;
+    
                     //RELATIONS
-    @ManyToOne
-    private Products products;
+    // @ManyToOne
+    // private Products products;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
-    private List<BillEntity> bill = new ArrayList<>(); ;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "pedido_id_factura", referencedColumnName = "id")
+    private BillEntity bill;
 
-    @ManyToOne
-    @JoinColumn(name = "idCampañas", referencedColumnName = "id_campañas", insertable = false, updatable = false)
-    private ChannelCampaign channelCamp;
+    // @OneToOne(mappedBy = "pedido_id_factura", fetch = FetchType.EAGER)
+    // private List<BillEntity> bill = new ArrayList<>(); ;
+    //* pendiente añadir FK cliente */
 
-    @OneToOne(mappedBy = "orderEntity")
-    private ShippingDetail shippingDetails;
+    // @ManyToOne
+    // @JoinColumn(name = "idCampañas", referencedColumnName = "id_campañas", insertable = false, updatable = false)
+    // private ChannelCampaign channelCamp;
 
-    @ManyToOne
-    private Users users;
-
-
+    // @ManyToOne
+    // private Users users;
 
 }

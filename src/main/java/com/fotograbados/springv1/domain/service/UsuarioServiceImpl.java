@@ -15,56 +15,68 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsuarioServiceImpl implements IUsuarioService {
-		@Autowired
-		private UsuarioRepository usuarioRepository;
-		@Autowired
-		private RolRepository rolRepository;
+public class UsuarioServiceImpl{
+	@Autowired
+	private UsuarioRepository usuarioRepository;
+	@Autowired
+	private RolRepository rolRepository;
 
 
-	@Override
 	public List<Users> findAll() {
 		return usuarioRepository.findAll();
 	}
 
-	@Override
 	public Optional<Users> findById(Long id) {
 		return usuarioRepository.findById(id);
 	}
 
-	@Override
-	@Transactional
-	public Users save(Users user) {
-		// Asignar el ID del rol "USER"
-		Long userRoleId = 1L;
-
-		// Buscar el rol "USER" en la base de datos por ID
-		RolEntity rol = rolRepository.findById(userRoleId).orElseThrow(() ->
-				new RuntimeException("Rol 'USER' no encontrado en la base de datos")
-		);
-
-		// Asignar el rol al usuario
-		user.setRolEntity(rol);
-
-		// Guardar el usuario con el rol asignado
-		return usuarioRepository.save(user);
-	}
-
-
-		@Override
-	@Transactional
-	public Users updateRole(Long userId, String newRole) {
-		Users user = usuarioRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
-		RolEntity rol = rolRepository.findByTipo(newRole);
-		if (rol == null) {
-			throw new RuntimeException("Rol '" + newRole + "' no encontrado en la base de datos");
+	public int saveOrUpdate(Users user){
+		int res= 0;
+		Users users = usuarioRepository.save(user);
+		if(!users.equals(null)){
+			res =1;
 		}
-		user.setRolEntity(rol);
-		return usuarioRepository.save(user);
+		return res;
 	}
 
-	@Override
-	public Optional<Users> findByEmail(String email) {
-		return usuarioRepository.findByEmail(email);
+	//delete
+	public void delete(Long id) {
+		usuarioRepository.deleteById(id);
 	}
+
+	// @Override
+	// @Transactional
+	// public Users save(Users user) {
+	// 	// Asignar el ID del rol "USER"
+	// 	Long userRoleId = 1L;
+
+	// 	// Buscar el rol "USER" en la base de datos por ID
+	// 	RolEntity rol = rolRepository.findById(userRoleId).orElseThrow(() ->
+	// 			new RuntimeException("Rol 'USER' no encontrado en la base de datos")
+	// 	);
+
+	// 	// Asignar el rol al usuario
+	// 	user.setRolEntity(rol);
+
+	// 	// Guardar el usuario con el rol asignado
+	// 	return usuarioRepository.save(user);
+	// }
+
+
+	// 	@Override
+	// @Transactional
+	// public Users updateRole(Long userId, String newRole) {
+	// 	Users user = usuarioRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
+	// 	RolEntity rol = rolRepository.findByTipo(newRole);
+	// 	if (rol == null) {
+	// 		throw new RuntimeException("Rol '" + newRole + "' no encontrado en la base de datos");
+	// 	}
+	// 	user.setRolEntity(rol);
+	// 	return usuarioRepository.save(user);
+	// }
+
+	// @Override
+	// public Optional<Users> findByEmail(String email) {
+	// 	return usuarioRepository.findByEmail(email);
+	// }
 }

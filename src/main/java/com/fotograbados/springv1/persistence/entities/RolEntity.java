@@ -6,8 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
 @Table(name = "rol")
 @Getter
@@ -18,10 +16,7 @@ public class RolEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_rol", nullable = false)
-    private Long idRol;
-    private String tipo;
+    private Long id_rol;
+    @Column(name = "descripcion", nullable = false)
     private String descripcion;
-                //RELATIONS
-    //@OneToOne(mappedBy = "rolEntity")
-    //private Users users;
 }
