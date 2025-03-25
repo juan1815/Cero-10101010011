@@ -5,13 +5,14 @@ spring:
   application:
     name: msvc-eureka
   config:
-    # prueba para desplegar eureka
+    # prueba para ignorar configServer y desplegar eureka
     import: optional:configserver:http://localhost:8888
 
 eureka:
   instance:
     hostname: localhost
   client:
+    #para que no se registre dentro de si mismo
     register-with-eureka: false
     fetch-registry: false
     server-url:
